@@ -1,0 +1,506 @@
+{% load static%}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width = device-width, initial scale = 1">
+    <link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet">
+    <link href="{% static "css/styles.css" %}" rel="stylesheet">
+    <link href="{% static "css/all.min.css" %}" rel="stylesheet">
+    <title>Startup's homepage</title>
+  </head>
+  <body>
+    <script src="{% static "js/jquery.min.js" %}"></script>
+    <script src="{% static "js/myscript.js" %}"></script>
+    <script src="{% static "js/all.min.js" %}"></script>
+    <script src="{% static "js/popper.min.js" %}"></script>
+    <script src="{% static "js/bootstrap.min.js" %}"></script>
+    <style>
+
+      html{
+        scroll-behavior: smooth;
+      }
+
+      .myNav{
+        position: sticky;
+        top: 0;
+        z-index: 10;
+      }
+
+      body{
+        margin: 5px;
+        background-image: url("{% static "images/bg-color1.jpg" %}");
+        background-attachment: fixed;
+        position:sticky;
+      }
+
+    </style>
+
+    <!--Navbar begin-->
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light myNav">
+      <a class="navbar-brand" href="#">Startup's page</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#" onclick="openModalProfile()"><i class='fa fa-home' aria-hidden="true"></i> Profile </a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link js-scroll-trigger" href="#dashboard"><i class='fa fa-columns' aria-hidden="true"></i> Dashboard </a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link js-scroll-trigger" href="#other_student_details"><i class='fa fa-check-circle' aria-hidden="true"></i> Available Students </a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="#" onclick="openModalContactUs()"><i class='fa fa-phone fa-flip-horizontal' aria-hidden="true"></i> Contact us</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="{% url 'user_logout' pk=startup.id %}"><i class='fa fa-power-off' aria-hidden="true"></i> Log-out</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="#" onclick="openModalHireForm()"><i class='fa fa-briefcase' aria-hidden="true"></i>  Add New Internship Position</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <h4><i class='fa fa-user' aria-hidden="true"></i> {{startup}} </h4>
+          </li>
+      </ul>
+      </div>
+    </nav>
+    <!-- Navbar end-->
+
+    <!--Navbar script start-->
+    <script>
+    for(i=0; i<$('.nav-item').length; i++)
+    {
+      $('.nav-item').eq(i).mouseenter(function(){$(this).removeClass('active');}).mouseleave(function(){$(this).addClass('active');});
+    }
+    </script>
+    <!--Navbar script end-->
+
+    <!--Dashboard style begins-->
+    <style>
+    .jumbotron {
+    opacity:0.9;
+    }
+    </style>
+    <!--Dashboard style ends-->
+
+    <!--Dashboard html begins-->
+    <section class="jumbotron section"  id="dashboard">
+        <div class="container">
+          <h1 class="display-2">Welcome {{startup.user}} !! </h1>
+          <h3 > - {{startup.POC}}</h3>
+          <h6> - Please Upload Your Startup Logo by clicking on Profile </h6>
+          <hr class="my-4">
+          <p class="lead">Here you can see students you have shortlisted by far.</p>
+            <div class="row gap-y table-responsive table-hover">
+              <table class="table">
+                {% for updated_student in updated_students %}
+                <tr class="col-lg-6 col-md-6 col-sm-12 col-xs-12" onMouseOver="this.style.color='blue'" onMouseOut="this.style.color='black'" id="s1o">
+                  <td style="width:33%">Name : {{updated_student.student.user}}</td>
+                  <td style="width:33%">Profile : {{updated_student.intern_pos.profile}}</td>
+                  <td style="width:33%">Status : {{updated_student.status}}</td>
+                  <td style="width:33%"><a href="{{updated_student.resume}}"><i class="fa fa-download"></i> Resume </a></td>
+                  <form method="post">
+                  {% csrf_token %}
+                  <input type="hidden" name="student" value="{{updated_student.student.user}}">
+                  <input type="hidden" name="pos" value="{{updated_student.intern_pos.profile}}">
+                  <td style="width:33%"><button class="unlist_button_1 btn btn-danger" type="submit"><i class="fa fa-minus"></i> Remove</button></td>
+                  </form>
+                </tr>
+                {% endfor %}
+              </table>
+            </div>
+        </div>
+      </section>
+    <!--Dashboard html ends-->
+
+    <!--Other Student Details style begins-->
+    <style>
+      .other{
+        color: white;
+      }
+
+      #s1d,#s2d,#s3d,#s4d,#s5d,#s6d{
+        display: none;
+      }
+
+      .drop_text:hover{
+        color: orange;
+      }
+
+      .popup_text{
+        display: none;
+      }
+
+    </style>
+    <!--Other Student Details style ends-->
+
+    <!--Other Student Details html begins-->
+    <section class="section"  id="other_student_details">
+      <div class="container">
+        <header class="section-header">
+          <h2 class="display-3 fw-400 text-white">Available Students</h2>
+        </header>
+        <div class="row gap-y">
+          <div class="row gap-y table-responsive table-hover">
+            <table class="table other">
+              {% for application in applied_students %}
+              <tr class="col-lg-6 col-md-6 col-sm-12 col-xs-12" onMouseOver="this.style.color='yellow'" onMouseOut="this.style.color='white'" id="s1o">
+                <td style="width:20%">Profile : {{application.intern_pos.profile}}</td>
+                <td style="width:20%">Name : {{application.student.user}}</td>
+                <td style="width:20%"><a href="{{application.resume}}"><i class="fa fa-download"></i> Resume </a></td>
+                <td style="width:20%" ><button class="btn btn-outline-warning" id="popup_button_of_{{application.student.user}}">Student's Content</button><span style="color:rgb(46, 250, 5)" class="popup_text popup_text_of_{{application.student.user}}" id="hey">{{application.content}}</span></td>
+                <td style="width:20%">
+                  <div class="dropdown">
+                    <button class="dropdown-toggle shortlist_button_1 btn btn-warning" data-toggle="dropdown">{{application.status}}</button>
+                    <ul class="dropdown-menu">
+                      <li class="shortlist_option" id="shortlist_option_of_{{application.student.user}}"><button class="btn"><span class="drop_text">Shortlist</span></button></li>
+                      <li class="reject_option" id="reject_option_of_{{application.student.user}}"><button class="btn"><span class="drop_text">Reject</span></button></li>
+                    </ul>
+                  </div>
+                </td>
+              </tr>
+              <script>
+              $('#popup_button_of_{{application.student.user}}').on('mouseover',function(){
+                $(".popup_text_of_{{application.student.user}}").css('display','inline-block');
+              }).on('mouseout',function(){
+                $(".popup_text_of_{{application.student.user}}").css('display','none');
+              });
+
+              $("#shortlist_option_of_{{application.student.user}}").on('click',function(){
+                $("#are_you_sure_prompt_student_name").attr("value","{{application.student.user}}");
+                $("#are_you_sure_prompt_student_position").attr("value","{{application.intern_pos.profile}}");
+                $("#are_you_sure_prompt").css("display","block");
+                $('.modal-title').text("Warning");
+                $('.modalBtn').click();
+              });
+
+              $("#reject_option_of_{{application.student.user}}").on('click',function(){
+                $("#are_you_sure_prompt_student_name").attr("value","{{application.student.user}}");
+                $("#are_you_sure_prompt_student_position").attr("value","{{application.intern_pos.profile}}");
+                $("#are_you_sure_prompt").css("display","block");
+                $('.modal-title').text("Warning");
+                $('.modalBtn').click();
+              });
+              </script>
+              {% endfor %}
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--Other Student Details html ends-->
+
+    <!--Dashboard and Other Startup Details combined script begins-->
+    <script>
+    $('.dropdown').on('show.bs.dropdown', function() {
+      $(this).find('.dropdown-menu').first().stop(true, true).slideDown();
+    });
+
+    $('.dropdown').on('hide.bs.dropdown', function() {
+      $(this).find('.dropdown-menu').first().stop(true, true).slideUp();
+    });
+
+    $('.table-responsive').on('show.bs.dropdown', function () {
+      $('.table-responsive').css( "overflow", "inherit" );
+    });
+
+    </script>
+
+    <script>
+  /*  function clean_up(){
+    for(i=0; i<$('.reg_yes').length; i++)
+    {
+      if($('.reg_yes').eq(i).attr("id")==="s1d")
+      {
+        $('#s1d').css('display','inline-block');
+        $('#s1o').css('display','none');
+      }
+
+      if($('.reg_yes').eq(i).attr("id")==="s2d")
+      {
+        $('#s2d').css('display','inline-block');
+        $('#s2o').css('display','none');
+      }
+
+      if($('.reg_yes').eq(i).attr("id")==="s3d")
+      {
+        $('#s3d').css('display','inline-block');
+        $('#s3o').css('display','none');
+      }
+
+      if($('.reg_yes').eq(i).attr("id")==="s4d")
+      {
+        $('#s4d').css('display','inline-block');
+        $('#s4o').css('display','none');
+      }
+
+      if($('.reg_yes').eq(i).attr("id")==="s5d")
+      {
+        $('#s5d').css('display','inline-block');
+        $('#s5o').css('display','none');
+      }
+
+      if($('.reg_yes').eq(i).attr("id")==="s6d")
+      {
+        $('#s6d').css('display','inline-block');
+        $('#s6o').css('display','none');
+      }
+    }
+
+    for(i=0; i<$('.reg_no').length; i++)
+    {
+      if($('.reg_no').eq(i).attr("id")==="s1d")
+      {
+        $('#s1d').css('display','none');
+        $('#s1o').css('display','inline-block');
+      }
+
+      if($('.reg_no').eq(i).attr("id")==="s2d")
+      {
+        $('#s2d').css('display','none');
+        $('#s2o').css('display','inline-block');
+      }
+
+      if($('.reg_no').eq(i).attr("id")==="s3d")
+      {
+        $('#s3d').css('display','none');
+        $('#s3o').css('display','inline-block');
+      }
+
+      if($('.reg_no').eq(i).attr("id")==="s4d")
+      {
+        $('#s4d').css('display','none');
+        $('#s4o').css('display','inline-block');
+      }
+
+      if($('.reg_no').eq(i).attr("id")==="s5d")
+      {
+        $('#s5d').css('display','none');
+        $('#s5o').css('display','inline-block');
+      }
+
+      if($('.reg_no').eq(i).attr("id")==="s6d")
+      {
+        $('#s6d').css('display','none');
+        $('#s6o').css('display','inline-block');
+      }
+    }
+  };
+
+  clean_up(); */
+    </script>
+
+    <script>
+  /*  $('.shortlist_button_1').on('click',function(){
+      $('#s1d').addClass('reg_yes');
+      $('#s1d').removeClass('reg_no');
+      clean_up();
+    });
+    $('.shortlist_button_2').on('click',function(){
+      $('#s2d').addClass('reg_yes');
+      $('#s2d').removeClass('reg_no');
+      clean_up();
+    });
+    $('.shortlist_button_3').on('click',function(){
+      $('#s3d').addClass('reg_yes');
+      $('#s3d').removeClass('reg_no');
+      clean_up();
+    });
+    $('.shortlist_button_4').on('click',function(){
+      $('#s4d').addClass('reg_yes');
+      $('#s4d').removeClass('reg_no');
+      clean_up();
+    });
+    $('.shortlist_button_5').on('click',function(){
+      $('#s5d').addClass('reg_yes');
+      $('#s5d').removeClass('reg_no');
+      clean_up();
+    });
+    $('.shortlist_button_6').on('click',function(){
+      $('#s6d').addClass('reg_yes');
+      $('#s6d').removeClass('reg_no');
+      clean_up();
+    });
+    $('.unlist_button_1').on('click',function(){
+      $('#s1d').removeClass('reg_yes');
+      $('#s1d').addClass('reg_no');
+      clean_up();
+    });
+    $('.unlist_button_2').on('click',function(){
+      $('#s2d').removeClass('reg_yes');
+      $('#s2d').addClass('reg_no');
+      clean_up();
+    });
+    $('.unlist_button_3').on('click',function(){
+      $('#s3d').removeClass('reg_yes');
+      $('#s3d').addClass('reg_no');
+      clean_up();
+    });
+    $('.unlist_button_4').on('click',function(){
+      $('#s4d').removeClass('reg_yes');
+      $('#s4d').addClass('reg_no');
+      clean_up();
+    });
+    $('.unlist_button_5').on('click',function(){
+      $('#s5d').removeClass('reg_yes');
+      $('#s5d').addClass('reg_no');
+      clean_up();
+    });
+    $('.unlist_button_6').on('click',function(){
+      $('#s6d').removeClass('reg_yes');
+      $('#s6d').addClass('reg_no');
+      clean_up();
+    });*/
+    </script>
+    <!--Dashboard and Other STudent details combined script ends-->
+
+    <!--Profile and hire position style begin-->
+    <style>
+    #profile_form, #apply_for_position_form, #are_you_sure_prompt{
+      display:none;
+    }
+
+    </style>
+    <!--Profile and hire position style end-->
+
+    <!--Profile and hire position html begin-->
+    <button type="button" data-backdrop="static" data-keyboard="false" class="btn btn-primary modalBtn" data-toggle="modal" data-target=".bd-example-modal-lg" style="display: none;"></button>
+    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Your Profile</h5>
+          </div>
+            <div class="modal-body">
+              <div id="profile_form">
+            <form method='post' enctype="multipart/form-data">
+              {% csrf_token %}
+              <label for="company_name">Company: </label>
+              <input type="text" name="company_name" id="company_name" class="form-control" placeholder="{{startup.user}}" readonly><br>
+              <hr class="my4">
+              <p style="font-weight:bold;">Upload your company logo</p>
+              <div class="custom-file">
+    				  	{{ logo_form.as_p }}
+    				  </div>
+            <p> </p>
+           <button type="submit" class="btn btn-primary">Save changes</button>
+            </form>
+          </div>
+          <div id="apply_for_position_form">
+            <form method='post'>
+              {% csrf_token %}
+              <label for="Cname">Company: </label>
+              <input type="text" name="Cname" id="Cname" class="form-control" value="{{startup.user}}"  readonly><br>
+              <label for="Clocation">Location: </label>
+              <input type="text" name="Clocation" id="Clocation" class="form-control"><br>
+              <label for="Cstipend">Stipend: </label>
+              <input type="text" name="Cstipend" id="Cstipend" class="form-control" ><br>
+              <label for="Callowances">Allowances: </label>
+              <textarea name="Callowances" id="Callowances" class="form-control textarea-autosize" ></textarea><br>
+              <label for="company_intern_positions">Hiring for: </label>
+              <input type="text" name="Cintern_positions" rows="3" cols="2" placeholder="Kindly add one position per form" id="Cintern_positions" class="form-control"><br>
+            <p> </p>
+           <button type="submit" class="btn btn-primary">Save changes</button>
+            </form>
+          </div>
+          <div id="are_you_sure_prompt">
+            <p>Are you sure?
+            </p>
+            <form method="post">
+              {% csrf_token %}
+              <input type="hidden" id="are_you_sure_prompt_student_name" name="are_you_sure_prompt_student_name" value="initial_value_1">
+              <input type="hidden" id="are_you_sure_prompt_student_position" name="are_you_sure_prompt_student_position" value="initial_value_2">
+              <button type="submit" class="btn btn-outline-primary"  name="btn" value="Shortlist">Shortlist</button>
+              <button type="submit" class="btn btn-outline-primary" name="btn" value="Reject">Reject</button>
+            </form>
+          </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" id="close_button">Close</button>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--Profile and hire position html end-->
+
+    <!--Profile script start-->
+    <script>
+    $('#close_button').on('click',function(){
+      $("#profile_form").css("display","none");
+      $("#apply_for_position_form").css("display","none");
+      $("#are_you_sure_prompt").css("display","none");
+      $("#are_you_sure_prompt_student_name").attr("value","initial_value_1");
+      $("#are_you_sure_prompt_student_position").attr("value","initial_value_2");
+    })
+
+    function openModalProfile(){
+      $("#profile_form").css("display","block");
+      $('.modal-title').text("Your Profile");
+      $('.modalBtn').click();
+    }
+
+    function openModalHireForm(){
+      $("#apply_for_position_form").css("display","block");
+      $('.modal-title').text("Apply for Position Form");
+      $('.modalBtn').click();
+    }
+
+
+    </script>
+    <!--Profile script end-->
+
+    <!--Credits and contact details start-->
+    <style>
+    .credits{
+      text-align:center;
+      color:orange;
+      margin:0 auto;
+    }
+
+    footer{
+      clear: both;
+      position: relative;
+      height:75px;
+      bottom: 0px;
+    }
+    </style>
+
+    <button type="button" data-backdrop="static" data-keyboard="false" class="btn btn-primary contactModalBtn" data-toggle="modal" data-target=".contact-modal" style="display: none;"></button>
+    <div class="modal fade contact-modal" id="contact-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Contact Us</h5>
+          </div>
+          <div class="modal-body" >
+            <p>For general queries, mail : internfair.iitg@gmail.com<hr>
+            For technical queries, mail : ayushjain.iitg@gmail.com</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="credits">
+      <p><br><i class="fa fa-copyright"></i> 2019 Designed and Developed by Ashish Menon and Ayush Jain<br></p>
+  </footer>
+
+  <script>
+    function openModalContactUs(){
+      $('.contactModalBtn').click();
+    }
+  </script>
+    <!--Credits and contact details end-->
+
+      </body>
+      </html>

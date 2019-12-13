@@ -1,0 +1,223 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width = device-width, initial scale = 1">
+    <link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet">
+    <link href="{% static "css/styles.css" %}" rel="stylesheet">
+    <link href="{% static "css/all.min.css" %}" rel="stylesheet">
+    <title>Internfair 2020 - Register page</title>
+  </head>
+  <body>
+    <script src="{% static "js/jquery.min.js" %}"></script>
+    <script src="{% static "js/myscript.js" %}"></script>
+    <script src="{% static "js/all.min.js" %}"></script>
+    <script src="{% static "js/popper.min.js" %}"></script>
+    <script src="{% static "js/bootstrap.min.js" %}"></script>
+
+    <style>
+      .myNav{
+        position: sticky;
+        top: 0;
+        z-index: 10;
+      }
+
+      body{
+        margin: 5px;
+        background-image: url("{% static "images/bg-color1.jpg" %}");
+        position:sticky;
+        background-attachment: fixed;
+      }
+    </style>
+
+<!--Navbar begin-->
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light myNav">
+      <a class="navbar-brand" href="#">Login portal</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="{% url 'home' %}"><i class='fa fa-home' aria-hidden="true"></i> Home </a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="{% url 'user_register' %}"><i class='fa fa-book' aria-hidden="true"></i> Register </a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="#"><i class='fa fa-phone fa-flip-horizontal' aria-hidden="true"></i> Contact us</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+<!-- Navbar end-->
+
+<!--Navbar script start-->
+<script>
+for(i=0; i<$('.nav-item').length; i++)
+{
+  $('.nav-item').eq(i).mouseenter(function(){$(this).removeClass('active');}).mouseleave(function(){$(this).addClass('active');});
+}
+</script>
+<!--Navbar script end-->
+
+<!--Card style begin-->
+    <style>
+    @media screen and (min-width: 576px){.card{
+    		margin: 2%;
+    		height: 100%;
+    		color: white;
+    	}
+    }
+
+    @media screen and (max-width: 576px){.card{
+    		margin: 2%;
+        padding: 3%;
+    		height: 100%;
+    		color: white;
+    	}
+    }
+    	.myForm{
+    		background-color: rgba(120, 120, 120, 0.6);
+    		transition: all 0.5s;
+    	}
+
+    	.row{
+    		margin-top: 2%;
+    	}
+
+    	.myForm:hover{
+    		box-shadow: 2px 8px 8px white;
+    		transition: all 0.5s;
+    	}
+
+      .headerRegister{
+          font-family: 'Century Gothic';
+          text-align: center;
+          color: aliceblue;
+          font-size: 30px;
+
+    </style>
+<!--Card Style end-->
+
+<!--Card html begin-->
+
+    <div class="row">
+
+    	<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" id="formDivStudent">
+        <div class='myForm card'>
+           <h3 class='headerRegister'>Student Register</h3>
+      			<div class="card-body">
+      				<form id="student_form" method='post'>
+                  {% csrf_token %}
+                  {% for field in students_form %}<p>
+                <label class="badge" style="color:white;font-size:15px;">{{field.label_tag}} </label>
+                <br>{{field}}
+              {% for error in field.errors %}
+                <p style="color: red">{{ error }}</p>
+             {% endfor %}
+            </p>
+            {% endfor %}
+            <br>
+
+
+                <input id="student_reset" class="btn btn-warning" type="reset" value="Reset" />
+                <button type="submit" class='btn btn-primary' style="position: relative; left: 40%; width: 20%;"  name="student_reg" id="student_reg">Register</button>
+    				</form>
+
+            <script>
+            $('#student_form').on('keydown', function(e){
+                if(e.keyCode==13){
+                e.preventDefault();
+              }
+              });
+
+                    $('#student_reg').on('click', function(){
+
+                  password1 = document.querySelector('#student_form').student_passwd.value;
+                  password2 = document.querySelector('#student_form').student_re_passwd.value;
+
+                  // If password not entered
+                  if (password1 == '')
+                      alert ("Please enter Password");
+
+                  // If confirm password not entered
+                  else if (password2 == '')
+                      alert ("Please enter confirm password");
+
+                  // If Not same return False.
+                  else if (password1 != password2) {
+                      $('#student_reset').click();
+                      alert ("\nPassword did not match: Please try again...");
+                      return false;
+                    }
+                      });
+            </script>
+      			</div>
+    		</div>
+    	</div>
+
+      <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" id="formDivStartup">
+  <div class='myForm card'>
+     <h3 class='headerRegister'>Startup Register</h3>
+      <div class="card-body">
+        <form id="startup_form" method='post'>
+          {% csrf_token %}
+          {% for field2 in startups_form %}<p>
+          <label class="badge" style="color:white;font-size:15px;">{{field2.label_tag}} </label>
+          <br>{{field2}}
+          {% for erroring in field2.errors %}
+            <p style="color: red">{{ erroring }}</p>
+          {% endfor %}
+          </p>
+          {% endfor %}
+          <br>
+
+          <input id="startup_reset" class="btn btn-warning" type="reset" value="Reset" />
+        <button type="submit" class='btn btn-primary' style="position: relative; left: 40%; width: 20%;"  name="startup_reg" id="startup_reg">Register</button>
+      </form>
+      <script>
+      $('#startup_form').on('keydown', function(e){
+          if(e.keyCode==13){
+          e.preventDefault();
+        }
+        });
+
+              $('#startup_reg').on('click', function(){
+
+            password1 = document.querySelector('#startup_form').startup_passwd.value;
+            password2 = document.querySelector('#startup_form').startup_re_passwd.value;
+
+            // If password not entered
+            if (password1 == '')
+                alert ("Please enter Password");
+
+            // If confirm password not entered
+            else if (password2 == '')
+                alert ("Please enter confirm password");
+
+            // If Not same return False.
+            else if (password1 != password2) {
+                $('#startup_reset').click();
+                alert ("\nPassword did not match: Please try again...");
+                return false;
+              }
+                });
+
+                for(var u=0; u<$('input').length; u++)
+                {
+                  if($('input').eq(u).attr("value")!="Reset")
+                  {
+                  $('input').eq(u).addClass("form-control");
+                }
+                }
+      </script>
+      </div>
+      </div>
+    </div>
+  </div>
+<!--Card html end-->
+  </body>
+  </html>
