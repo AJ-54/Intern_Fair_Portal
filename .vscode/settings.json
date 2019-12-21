@@ -7,5 +7,6 @@
         "xutility": "cpp",
         "vector": "cpp"
     },
-    "C_Cpp.errorSquiggles": "Disabled"
+    "C_Cpp.errorSquiggles": "Disabled",
+    "python.pythonPath": "internportal\\Scripts\\python.exe"
 }
