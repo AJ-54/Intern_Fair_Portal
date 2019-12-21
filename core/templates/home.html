@@ -301,7 +301,7 @@ for(i=0; i<$('.nav-item').length; i++)
                     <div class="tab-content p-4">
                         <div class="tab-pane fade show active" id="tab-home-1">
                             <div class="bg-white rounded shadow-7 container-fluid mw-100 p-6">
-                                <h5>Sign into your account</h5>
+                                <h5>Student Login</h5>
                                 <form action="{% url "stud_login" %}" method="post">
                                     {% csrf_token %}
                                     <div class="form-group">
@@ -314,9 +314,9 @@ for(i=0; i<$('.nav-item').length; i++)
                                     </div>
 
                                     {% if messages %}
-                                    <ul class="messages">
+                                    <ul class="messages nav flex-column">
                                         {% for message in messages %}
-                                        <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                                        <li{% if message.tags %} class="{{ message.tags }} nav-item" {% endif %}><small class="text-danger">{{ message }}</small></li>
                                             {% endfor %}
                                     </ul>
                                     {% endif %}
@@ -335,7 +335,7 @@ for(i=0; i<$('.nav-item').length; i++)
                         </div>
                         <div class="tab-pane fade" id="tab-profile-1">
                             <div class="bg-white rounded shadow-7 container-fluid mw-100 p-6">
-                                <h5>Sign into your account</h5>
+                                <h5>Startup Login</h5>
                                 {% csrf_token %}
                                 <form action="{% url 'stp_login'%}" method="post">
                                     <div class="form-group">
