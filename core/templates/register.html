@@ -4,36 +4,62 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width = device-width, initial scale = 1">
-    <link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet">
-    <link href="{% static "css/styles.css" %}" rel="stylesheet">
-    <link href="{% static "css/all.min.css" %}" rel="stylesheet">
+
+    <link href="{% static "css/page.css" %}" rel="stylesheet">
+    <link href="{% static "css/page.min.css" %}" rel="stylesheet">
+    <link href="{% static "css/style2.css" %}" rel="stylesheet">
     <title>Internfair 2020 - Register page</title>
+    <link rel="apple-touch-icon" href="{% static " images/UDGAM_logo.png " %}">
+    <link rel="icon" href="{% static " images/UDGAM_logo.png " %}">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-145301884-2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag('js', new Date());
+
+      gtag('config', 'UA-145301884-2');
+    </script>
   </head>
   <body>
     <script src="{% static "js/jquery.min.js" %}"></script>
-    <script src="{% static "js/myscript.js" %}"></script>
-    <script src="{% static "js/all.min.js" %}"></script>
-    <script src="{% static "js/popper.min.js" %}"></script>
-    <script src="{% static "js/bootstrap.min.js" %}"></script>
+
 
     <style>
-      .myNav{
-        position: sticky;
-        top: 0;
-        z-index: 10;
+      body {
+        background: url("{% static "images/bgbody2.jpg" %}") no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        background-size: cover;
+        -o-background-size: cover;
       }
-
-      body{
-        margin: 5px;
-        background-image: url("{% static "images/bg-color1.jpg" %}");
-        position:sticky;
-        background-attachment: fixed;
+      header {
+        background-image: url("{% static "images/register.png" %}");
       }
     </style>
+    <nav class="navbar navbar-expand-lg navbar-light navbar-stick-dark" data-navbar="sticky">
+      <div class="container">
+        <div class="navbar-left">
+          <button class="navbar-toggler" type="button">&#9776;</button>
+          <a class="navbar-brand" href="#">
+            <img class="logo-dark" src="{% static "images/UDGAM_logo.png" %}" alt="logo" height="60px" width="60px">
+            <img class="logo-light" src="{% static "images/UDGAM_logo.png" %}" alt="logo" height="60px" width="60px">
+          </a>
+        </div>
+    
+        <section class="navbar-mobile">
+          <!-- <span class="navbar-divider d-mobile-none"></span> -->
+          <nav class="nav nav-navbar ml-auto">
+            <a class="nav-link" href="{% url 'home' %}">Home</a>
+            <a class="nav-link" href="{% url 'user_register' %}">Register</a>
+            <a class="nav-link" href="#">Contact us</a>
+          </nav>
+        </section>
+      </div>
+    </nav>
 
 <!--Navbar begin-->
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light myNav">
+    <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light myNav">
       <a class="navbar-brand" href="#">Login portal</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -51,20 +77,35 @@
           </li>
         </ul>
       </div>
-    </nav>
+    </nav> -->
 <!-- Navbar end-->
 
+<header class="header text-white" data-overlay="6">
+  <div class="container text-center">
+
+    <div class="row">
+      <div class="col-md-8 mx-auto">
+
+        <h1>Registration</h1>
+        <p class="lead-2 opacity-90 mt-6">Want a chance to work with smart and motivated people or are you a startup looking for interns from one of the best engineering colleges of India! Register Here.</p>
+
+      </div>
+    </div>
+
+  </div>
+</header>
+
 <!--Navbar script start-->
-<script>
+<!-- <script>
 for(i=0; i<$('.nav-item').length; i++)
 {
   $('.nav-item').eq(i).mouseenter(function(){$(this).removeClass('active');}).mouseleave(function(){$(this).addClass('active');});
 }
-</script>
+</script> -->
 <!--Navbar script end-->
 
 <!--Card style begin-->
-    <style>
+    <!-- <style>
     @media screen and (min-width: 576px){.card{
     		margin: 2%;
     		height: 100%;
@@ -98,15 +139,62 @@ for(i=0; i<$('.nav-item').length; i++)
           text-align: center;
           color: aliceblue;
           font-size: 30px;
+      }
+    </style> -->
+/* <!--Card Style end--> */
 
-    </style>
-<!--Card Style end-->
+<main class="main-content">
+  <section class="section py-8">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 col-md-6" id="formDivStudent">
+          <div class="bg-white rounded shadow-7 container-fluid mw-100 p-6">
+            <h3>Student Registration</h3>
+            <form id="student_form" method='post'>
+              {% csrf_token %}
+              {% for field in students_form %}<p>
+                <label>{{field.label_tag}} </label>
+                <br>{{field}}
+                {% for error in field.errors %}
+                <p class="text-danger">{{ error }}</p>
+                {% endfor %}
+              </p>
+              {% endfor %}
+              <button type="submit" class="btn btn-success" name="student_reg"
+              id="student_reg">Register</button>
+              <input id="student_reset" class="btn btn-warning float-right" type="reset" value="Reset" />
+            </form>
+          </div>
+        </div>
+        <div class="col-12 col-md-6" id="formDivStartup">
+          <div class="bg-white rounded shadow-7 container-fluid mw-100 p-6">
+            <h3>Startup Registration</h3>
+            <form id="startup_form" method='post'>
+              {% csrf_token %}
+              {% for field2 in startups_form %}<p>
+              <label>{{field2.label_tag}} </label>
+                <br>{{field2}}
+                {% for erroring in field2.errors %}
+                <p style="color: red">{{ erroring }}</p>
+                {% endfor %}
+              </p>
+              {% endfor %}
+              
+              <button type="submit" class="btn btn-success" name="startup_reg" id="startup_reg">Register</button>
+              <input id="startup_reset" class="btn btn-warning float-right" type="reset" value="Reset" />
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
 
 <!--Card html begin-->
 
-    <div class="row">
 
-    	<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" id="formDivStudent">
+    	<!-- <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" id="formDivStudent">
         <div class='myForm card'>
            <h3 class='headerRegister'>Student Register</h3>
       			<div class="card-body">
@@ -157,9 +245,9 @@ for(i=0; i<$('.nav-item').length; i++)
             </script>
       			</div>
     		</div>
-    	</div>
+    	</div> -->
 
-      <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" id="formDivStartup">
+      <!-- <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" id="formDivStartup">
   <div class='myForm card'>
      <h3 class='headerRegister'>Startup Register</h3>
       <div class="card-body">
@@ -206,18 +294,40 @@ for(i=0; i<$('.nav-item').length; i++)
               }
                 });
 
-                for(var u=0; u<$('input').length; u++)
-                {
-                  if($('input').eq(u).attr("value")!="Reset")
-                  {
-                  $('input').eq(u).addClass("form-control");
-                }
-                }
+                
       </script>
       </div>
       </div>
+    </div> -->
+  <footer class="footer" style="background-color: #0c0032;">
+    <div class="container text-center">
+  
+      <div class="social social-sm social-bg-brand social-cycling">
+        <a class="social-twitter" href="https://twitter.com/ecelliitg"><i class="fa fa-twitter"></i></a>
+        <a class="social-facebook" href="https://www.facebook.com/ecell.iitg/"><i class="fa fa-facebook"></i></a>
+        <a href="mailto:edc@iitg.ac.in"><i class="fa fa-envelope"></i></a>
+        <a class="social-linkedin"
+          href="https://www.linkedin.com/company/udgam-the-annual-entrepreneurship-summit-of-iit-guwahati/"><i
+            class="fa fa-linkedin"></i></a>
+        <a class="social-instagram" href="https://www.instagram.com/ecell_iitg/"><i class="fa fa-instagram"></i></a>
+      </div>
+  
+      <br>
+  
+      <p class="small text-white">Copyright © 2020 UDGAM Creatives, All rights reserved.</p>
+  
     </div>
-  </div>
+  </footer>
+
 <!--Card html end-->
+    <script>
+      for (var u = 0; u < $('input').length; u++) {
+        if ($('input').eq(u).attr("value") != "Reset") {
+          $('input').eq(u).addClass("form-control");
+        }
+      }
+    </script>
+    <script src="{% static "js/page.min.js" %}"></script>
+    <script src="{% static "js/script.js" %}"></script>
   </body>
-  </html>
+</html>
