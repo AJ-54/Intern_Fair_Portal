@@ -37,7 +37,7 @@
 
     <nav class="navbar navbar-expand-lg navbar-dark navbar-stick-dark" data-navbar="sticky">
       <div class="container">
-    
+
         <div class="navbar-left mr-4">
           <button class="navbar-toggler" type="button">&#9776;</button>
           <a class="navbar-brand" href="#">
@@ -45,22 +45,22 @@
             <img class="logo-light" src="{% static "images/UDGAM_logo.png" %}" alt="logo" height="60px" width="60px">
           </a>
         </div>
-    
+
         <section class="navbar-mobile">
           <nav class="nav nav-navbar mr-auto">
             <a class="nav-link js-scroll-trigger" href="#dashboard">Dashboard</a>
             <a class="nav-link js-scroll-trigger" href="#other_startup_details">Available Startups</a>
             <a class="nav-link" href="#" onclick="openModalContactUs()">Contact us</a>
           </nav>
-    
+
           <nav class="nav nav-navbar ml-auto">
             <a class="nav-link" href="#"><i class="fa fa-user"></i> {{student.name}}</a>
           </nav>
           <div>
-            <a class="btn btn-sm btn-primary btn-round ml-lg-5 mr-2" href={%url 'user_logout' pk=student.id %}>Log Out</a>
+            <a class="btn btn-sm btn-primary btn-round ml-lg-5 mr-2" href="{%url 'user_logout' pk=student.id %}">Log Out</a>
           </div>
         </section>
-    
+
       </div>
     </nav>
     <!--Navbar begin-->
@@ -98,7 +98,7 @@
     <!--Navbar script end-->
 
     <!--Dashbaord and Other Startup details style begin-->
-    <style>
+    <!-- <style>
     #s1d,#s2d,#s3d,#s4d,#s5d,#s6d{
       display: none;
     }
@@ -126,27 +126,31 @@
      display:none;
    }
 
-    </style>
+    </style> -->
     <!-- Dashbaord and Other Startup details style ends-->
 
     <!--Dashboard html start-->
     <header class="header section"  id="dashboard">
         <div class="container">
-          <h1 class="lead-7 fw-400">Welcome {{student.name}} </h1> 
-          <hr class="w-30 ml-0">
-          <h3> {% if chances == 0 %}
-              You have reached the maximum number of applications a user can apply for!<br>
-              We wish you all the best for your applications!
-              {% else  %}
-          You have {{chances}} more chances to  apply and grab an internship!
-          {% endif %} </h3>
-          <hr class="my-4 w-10 ml-0">
-          <p class="lead">Here you can see Startups you've registered for :</p><br>
+          <div class="row">
+            <div class="col-12">
+              <h1 class="lead-7 fw-400">Welcome {{student.name}} </h1>
+              <hr class="w-30 ml-0">
+              <h3> {% if chances == 0 %}
+                You have reached the maximum number of applications a user can apply for!<br>
+                We wish you all the best for your applications!
+                {% else  %}
+                You have {{chances}} more chances to apply and grab an internship!
+                {% endif %} </h3>
+              <hr class="my-4 w-10 ml-0">
+              <p class="lead">Here you can see Startups you've registered for :</p><br>
+            </div>
+          </div>
             <div class="row gap-y">
               {% for appliedstartup in applied_startups %}
                   <div class="col-12 col-sm-6 col-md-4 col-lg-3 hover-shadow-4 d-flex align-items-stretch">
                     <div class="card d-block">
-                      <img class="card-img-top" src="{{appliedstartup.intern_pos.startup.logo.url}}" alt="Card image cap">
+                      <img class="card-img-top p-2" src="{{appliedstartup.intern_pos.startup.logo.url}}" alt="Card image cap">
                       <div class="card-body">
                         <h5 class="card-title">{{appliedstartup.intern_pos.startup}}</h5>
                         <p>Profile : {{appliedstartup.intern_pos.profile}}</p>
@@ -187,7 +191,7 @@
             {% for startup in startups %}
               <div class="col-12 col-sm-6 col-md-4 col-lg-3 hover-shadow-4 d-flex align-items-stretch" id="{{startup.user}}_other">
                 <div class="card d-block">
-                  <img class="card-img-top" src="{{startup.logo.url}}" alt="Card image cap">
+                  <img class="card-img-top p-2" src="{{startup.logo.url}}" alt="Card image cap">
                   <div class="card-body">
                     <h5 class="card-title">{{startup.user}}</h5>
                     <p>Point of Contact : {{startup.POC}}</p>
@@ -464,25 +468,19 @@
       </div>
     </div>
 
-<footer class="footer" style="background-color: #0c0032;">
-  <div class="container text-center">
-
-    <div class="social social-sm social-bg-brand social-cycling">
-      <a class="social-twitter" href="https://twitter.com/ecelliitg"><i class="fa fa-twitter"></i></a>
-      <a class="social-facebook" href="https://www.facebook.com/ecell.iitg/"><i class="fa fa-facebook"></i></a>
-      <a href="mailto:edc@iitg.ac.in"><i class="fa fa-envelope"></i></a>
-      <a class="social-linkedin"
-        href="https://www.linkedin.com/company/udgam-the-annual-entrepreneurship-summit-of-iit-guwahati/"><i
-          class="fa fa-linkedin"></i></a>
-      <a class="social-instagram" href="https://www.instagram.com/ecell_iitg/"><i class="fa fa-instagram"></i></a>
-    </div>
-
-    <br>
-
-    <Designed class="small text-white">Copyright © 2020 UDGAM Creatives, All rights reserved.<br> Designed and Developed by Ashish Menon, Rishi Pathak and Ayush Jain<br></p>
-
-  </div>
-</footer>
+    <footer class="footer text-center" style="background-color: #0c0032;">
+        <div class="social social-sm social-bg-brand social-cycling">
+          <a class="social-twitter" href="https://twitter.com/ecelliitg"><i class="fa fa-twitter"></i></a>
+          <a class="social-facebook" href="https://www.facebook.com/ecell.iitg/"><i class="fa fa-facebook"></i></a>
+          <a href="mailto:edc@iitg.ac.in"><i class="fa fa-envelope"></i></a>
+          <a class="social-linkedin"
+            href="https://www.linkedin.com/company/udgam-the-annual-entrepreneurship-summit-of-iit-guwahati/"><i
+              class="fa fa-linkedin"></i></a>
+          <a class="social-instagram" href="https://www.instagram.com/ecell_iitg/"><i class="fa fa-instagram"></i></a>
+        </div>
+        <br>
+        <p class="small text-white">Copyright © 2020 UDGAM Creatives, All rights reserved.<br> Designed and Developed by Ashish Menon, Rishi Pathak and Ayush Jain</p>
+    </footer>
   <script>
     function openModalContactUs(){
       $('.contactModalBtn').click();
@@ -498,5 +496,5 @@
     </script>
   <script src="{% static "js/page.min.js" %}"></script>
   <script src="{% static "js/script.js" %}"></script>
-  </body>
+</body>
 </html>

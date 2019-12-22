@@ -477,7 +477,7 @@ $('.box2').on('click', function(){
 
 </script> -->
     <!--Form script ends-->
-
+<!-- 
     <div class="modal fade" id="student_forgot" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
       aria-hidden="true">
       <div class="modal-dialog" role="document">
@@ -530,10 +530,10 @@ $('.box2').on('click', function(){
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
 
     <!--Forgot Password html begins-->
-    <!-- <button type="button" class="btn btn-primary modalBtn" data-toggle="modal" data-target=".bd-example-modal-lg" style="display: none;"></button>
+    <button type="button" class="btn btn-primary modalBtn" data-toggle="modal" data-target=".bd-example-modal-lg" style="display: none;"></button>
 
 <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
@@ -569,25 +569,25 @@ $('.box2').on('click', function(){
       </div>
     </div>
   </div>
-</div> -->
+</div>
 
     <!--Forgot Password html end-->
 
     <!--Forgot Password script (including reset password form validation) end-->
     <script>
-      //   $('#student_forgot').on('click',function(){
-      //     $('#student_reset').css('display','inline-block');
-      //     $('#startup_reset').css('display','none');
-      //   });
+        $('#student_forgot').on('click',function(){
+          $('#student_reset').css('display','inline-block');
+          $('#startup_reset').css('display','none');
+        });
 
-      //     $('#startup_forgot').on('click',function(){
-      //     $('#startup_reset').css('display','inline-block');
-      //     $('#student_reset').css('display','none');
-      //   });
+          $('#startup_forgot').on('click',function(){
+          $('#startup_reset').css('display','inline-block');
+          $('#student_reset').css('display','none');
+        });
 
-      //     function openModal(){
-      //       $('.modalBtn').click();
-      //     }
+          function openModal(){
+            $('.modalBtn').click();
+          }
 
       $("#forgot_password_startup_submit").on('click', function () {
         if (document.querySelector("#startup_reset-form").email.value !== "") {
