@@ -150,13 +150,6 @@
                       <div class="card-body">
                         <h5 class="card-title">{{appliedstartup.intern_pos.startup}}</h5>
                         <p>Profile : {{appliedstartup.intern_pos.profile}}</p>
-                        <form method="post">
-                          {% csrf_token %}
-                          <input type="hidden" name="startup" value="{{appliedstartup.intern_pos.startup}}">
-                          <input type="hidden" name="my_profile" value="{{appliedstartup.intern_pos.profile}}">
-                          <button class="unregister_button btn btn-outline-danger" type="submit" {% if appliedstartup.status == 'PENDING'%}
-                            enable {% else %} disabled {% endif %}>Unregister</button><br>
-                        </form>
                       </div>
                       <div class="card-hover bg-dark text-white" data-animation="fade">
                         <div class="card-body align-self-center">
@@ -167,6 +160,13 @@
                             <li> Allowances : {{appliedstartup.intern_pos.allowances}} </li>
                             <li> Status : {{appliedstartup.status}} </li>
                           </ul>
+                          <form method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="startup" value="{{appliedstartup.intern_pos.startup}}">
+                            <input type="hidden" name="my_profile" value="{{appliedstartup.intern_pos.profile}}">
+                            <button class="unregister_button btn btn-outline-danger mt-5" type="submit" {% if appliedstartup.status == 'PENDING'%}
+                              enable {% else %} disabled {% endif %}>Unregister</button><br>
+                          </form>
                         </div>
                       </div>
                     </div>
