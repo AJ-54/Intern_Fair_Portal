@@ -13,7 +13,6 @@ from django.conf import settings
 # Create your views here.
 
 def home(request):
-    print ("Hii, I am Ayush.....")
     return  render(request, "home.html")
 
 def signup_view(request):
@@ -63,9 +62,9 @@ def user_logout(request, **kwargs):
 
 def stud_login(request):
     if request.method == 'POST':
-        print ("Hi, I am inside stud_login view......")
+        
         username = request.POST.get('student_id')
-        print ("Hi.....Logged in user has name ",username)
+        
         password = request.POST.get('passwd')
         user = authenticate(username=username, password=password)
         if user:
@@ -86,7 +85,7 @@ def stp_login(request):
         username = request.POST.get('startup_id')
         password = request.POST.get('passwd')
         user = authenticate(username=username, password=password)
-        print("hi........current startup is",user)
+        
         if user:
             if user.is_active:
                 login(request,user)
@@ -105,17 +104,22 @@ def stud_home(request,**kwargs):
     current_user = request.user
   
     # Getting Student Details
-    stud_object = Students.objects.get(user=current_user)
+    try:
+        stud_object = Students.objects.get(user=current_user)
+    except:
+        messages.info(request,"Kindly Login in StartUp section")
+        logout(request)
+        return HttpResponseRedirect(reverse('home'))      
     
     # Getting List of Available Startups
     all_startups = StartUps.objects.all()
 
     # When new application is created
     if request.method == 'POST':
-        print ("hii,i am inside the form post method")
+        
         form = ApplicationForm(request.POST,request.FILES)
         if form.is_valid():
-            print ("hii,i am inside the form valid method")
+           
             # app_form = form.save()
             profile = request.POST.get('profile')
             # print("Hiiii.....",profile)
@@ -147,11 +151,10 @@ def stud_home(request,**kwargs):
 
     #Number of remaining applications 
     chances = int(MaxValue.objects.all()[0].limit) - applied_startups.count()
-    print ("Remaining chances...",chances)
-    print ("Hi....the applied startups applications are...",applied_startups)
+   
     all_intern_details = InternDetails.objects.all()
 
-    print ("Hi...all internship details look like",all_intern_details)
+    
     context = {
         'student' : stud_object,
         'startups' : all_startups,
@@ -168,8 +171,13 @@ def stud_home(request,**kwargs):
 def startup_home(request,**kwargs):
     current_user = request.user
     # Getting StartUp Details
-    stp_object = StartUps.objects.get(user=current_user)
-    print("hi, I am inside startup home view.......",stp_object)
+    try:
+        stp_object = StartUps.objects.get(user=current_user)
+    except:
+        messages.info(request,"Kindly Login in Student Section")
+        logout(request)
+        return HttpResponseRedirect(reverse('home'))
+    
 
     # List of positions created by startup
     intern_positions = InternDetails.objects.all().filter(startup=stp_object)
@@ -184,7 +192,7 @@ def startup_home(request,**kwargs):
                 application_objects+=[application_object]
             else:
                 selected_objs += [application_object]
-    print ("Selected Students list....",selected_objs)
+    
     
     
     # Updating Application Status
@@ -194,7 +202,7 @@ def startup_home(request,**kwargs):
             status = request.POST.get('btn')
             student = request.POST.get('are_you_sure_prompt_student_name')
             position = request.POST.get('are_you_sure_prompt_student_position')
-            print("Hii....the status of student for the field is ",status,' ',student,' ',position)
+           
             user_obj = User.objects.get(username=student)
             stud_obj = Students.objects.get(user=user_obj)
             pos_obj = InternDetails.objects.get(startup=stp_object,profile=position)  
@@ -243,5 +251,5 @@ def startup_home(request,**kwargs):
 @login_required
 def pdf_view(request,pk,path):
     filepath = os.path.join(settings.MEDIA_ROOT,path)
-    print ("Hi....I am inside pdf view",filepath)
+   
     return  FileResponse(open(filepath, 'rb'), content_type='application/pdf')

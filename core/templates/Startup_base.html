@@ -128,8 +128,11 @@
             <div class="col-md-8">
               <h1 class="lead-7 fw-400">Welcome {{startup.user}} !! </h1>
               <h3> - {{startup.POC}}</h3>
+              {% if startup.logo %} 
+              {% else %}
               <hr class="w-30 ml-0">
-              <h6> - Please Upload Your Startup Logo by clicking on Profile </h6>
+              <h6> - Please Upload Your Startup Logo by clicking on Profile</h6>
+               {% endif %}
             </div>
             <div class="col-md-4">
               <div class="col-10 mx-auto">

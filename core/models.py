@@ -34,7 +34,7 @@ class Students(models.Model):
 class InternDetails(models.Model):
     startup = models.ForeignKey(StartUps, on_delete=models.CASCADE, related_name='intern_details')
     profile = models.CharField(max_length=50,blank=True)
-    stipend = models.IntegerField(blank=True)
+    stipend = models.CharField(max_length=100,blank=True)
     location = models.CharField(max_length=50,blank=True)
     allowances = models.CharField(max_length=150,blank=True)
 

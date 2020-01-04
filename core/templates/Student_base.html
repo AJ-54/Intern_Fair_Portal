@@ -136,6 +136,7 @@
             <div class="col-12">
               <h1 class="lead-7 fw-400">Welcome {{student.name}} </h1>
               <hr class="w-30 ml-0">
+              <h4> Please make sure you have purchased Udgam coupon by paying Rs. 100 to make your registration valid </h4>
               <h3> {% if chances == 0 %}
                 You have reached the maximum number of applications a user can apply for!<br>
                 We wish you all the best for your applications!
@@ -191,7 +192,7 @@
             {% for startup in startups %}
               <div class="col-12 col-sm-6 col-md-4 col-lg-3 hover-shadow-4 d-flex align-items-stretch" id="{{startup.user}}_other">
                 <div class="card d-block">
-                  <img class="card-img-top p-2" src="{{startup.logo.url}}" alt="Card image cap">
+                  <img class="card-img-top p-2" src="{% if startup.logo %}{{startup.logo.url}} {% else %}{% endif %}" alt="Card image cap">
                   <div class="card-body">
                     <h5 class="card-title">{{startup.user}}</h5>
                     <p>Point of Contact : {{startup.POC}}</p>
@@ -457,7 +458,7 @@
           <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLongTitle">Contact Us</h5>
           </div>
-          <div class="modal-body" >
+          <div style="display:inline-block;" class="modal-body" >
             <p>For general queries, mail : internfair.iitg@gmail.com<hr>
             For technical queries, mail : ayushjain.iitg@gmail.com</p>
           </div>
