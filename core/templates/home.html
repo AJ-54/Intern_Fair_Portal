@@ -1,39 +1,67 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
+
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width = device-width, initial scale = 1">
-    <link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet">
+    <!-- <link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet">
     <link href="{% static "css/styles.css" %}" rel="stylesheet">
-    <link href="{% static "css/all.min.css" %}" rel="stylesheet">
+    <link href="{% static "css/all.min.css" %}" rel="stylesheet"> -->
+    <link href="{% static "css/page.css" %}" rel="stylesheet">
+    <link href="{% static "css/page.min.css" %}" rel="stylesheet">
+    <link href="{% static "css/style2.css" %}" rel="stylesheet">
     <title>E-cell Internfair 2020</title>
+    <link rel="apple-touch-icon" href="{% static " images/UDGAM_logo.png " %}">
+    <link rel="icon" href="{% static " images/UDGAM_logo.png " %}">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-145301884-2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag('js', new Date());
+
+      gtag('config', 'UA-145301884-2');
+    </script>
   </head>
+
   <body>
-    <script src="{% static "js/jquery.min.js" %}"></script>
+    <!-- <script src="{% static "js/jquery.min.js" %}"></script>
     <script src="{% static "js/myscript.js" %}"></script>
     <script src="{% static "js/all.min.js" %}"></script>
     <script src="{% static "js/popper.min.js" %}"></script>
-    <script src="{% static "js/bootstrap.min.js" %}"></script>
-
+    <script src="{% static "js/bootstrap.min.js" %}"></script> -->
     <style>
-      .myNav{
-        position: sticky;
-        top: 0;
-        z-index: 10;
-      }
-
-      body{
-        margin: 5px;
-        background-image: url("{% static "images/bg-color1.jpg" %}");
-        position:sticky;
-        background-attachment: fixed;
+      body {
+        background: url("{% static "images/bgbody2.jpg" %}") no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        background-size: cover;
+        -o-background-size: cover;
       }
     </style>
+    <nav class="navbar navbar-expand-lg navbar-light navbar-stick-dark" data-navbar="sticky">
+      <div class="container">
+        <div class="navbar-left">
+          <button class="navbar-toggler" type="button">&#9776;</button>
+          <a class="navbar-brand" href="#">
+            <img class="logo-dark" src="{% static "images/UDGAM_logo.png" %}" alt="logo" height="60px" width="60px">
+            <img class="logo-light" src="{% static "images/UDGAM_logo.png" %}" alt="logo" height="60px" width="60px">
+          </a>
+        </div>
 
-<!--Navbar begin-->
+        <section class="navbar-mobile">
+          <!-- <span class="navbar-divider d-mobile-none"></span> -->
+          <nav class="nav nav-navbar ml-auto">
+            <a class="nav-link" href="{% url 'home' %}">Home</a>
+            <a class="nav-link" href="{% url 'user_register' %}">Register</a>
+            <a class="nav-link" href="#">Contact us</a>
+          </nav>
+        </section>
+      </div>
+    </nav>
+    <!--Navbar begin-->
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light myNav">
+    <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light myNav">
       <a class="navbar-brand" href="#">Login portal</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -51,20 +79,20 @@
           </li>
         </ul>
       </div>
-    </nav>
-<!-- Navbar end-->
+    </nav> -->
+    <!-- Navbar end-->
 
-<!--Navbar script start-->
-<script>
+    <!--Navbar script start-->
+    <!-- <script>
 for(i=0; i<$('.nav-item').length; i++)
 {
   $('.nav-item').eq(i).mouseenter(function(){$(this).removeClass('active');}).mouseleave(function(){$(this).addClass('active');});
 }
-</script>
-<!--Navbar script end-->
+</script> -->
+    <!--Navbar script end-->
 
-<!-- Choice style begin-->
-<style>
+    <!-- Choice style begin-->
+    <!-- <style>
 
 @media screen and (min-width: 576px) {
 	.myContainer{
@@ -152,8 +180,8 @@ for(i=0; i<$('.nav-item').length; i++)
 </style>
 <!--Choice style ends-->
 
-<!--Form style begins-->
-<style>
+    <!--Form style begins-->
+    <!-- <style>
 .card-1{
   display: block;
 }
@@ -191,23 +219,25 @@ for(i=0; i<$('.nav-item').length; i++)
         color: aliceblue;
         font-size: 50px;
     }
-</style>
+</style> --> -->
 
-<!--Form style ends-->
+    <!--Form style ends-->
 
-<!--Choice html begins-->
-<div class="row overall">
+    <!--Choice html begins
+<!--<div class="row overall">
 	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12  myContainer">
-    <div class='box box1 btn'><span id='boxText1'>Student</span></div>
-    <div class='box box2 btn'><span id="boxText2">Start-Up</span></div>
-	  		<div class='balls ball1'><span id='ballText1'><br> Student</span></div><br><br><br><br><br><br>
-	  		<div class='balls ball2'><span id='ballText2'><br> Start-Up </span></div>
-</div>
-<!--Choice html ends-->
+        <div class="box box1 btn"><span id="boxText1">Student</span></div>
+        <div class="box box2 btn"><span id="boxText2">Start-Up</span></div>
+        <div class="balls ball1"><span id="ballText1"><br> Student</span></div>
+        <br><br><br><br><br><br>
+        <div class="balls ball2"><span id="ballText2"><br> Start-Up </span></div>
+    <!-- </div> -->
 
-<!--Form html begins-->
-   <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-     <div class='form-box card-1' id="formDivStudent">
+    <!--Choice html ends-->
+
+    <!--Form html begins-->
+    <!-- <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"> -->
+    <!-- <div class='form-box card-1' id="formDivStudent">
  		    <h3 class='headerLogin'>Student Login</h3>
  		    <hr class="my-4">
         <form action="{% url "stud_login" %}" method="post">
@@ -228,16 +258,16 @@ for(i=0; i<$('.nav-item').length; i++)
           <div style="text-align: center; color: aliceblue;">Forgot password? <a href="#" onclick="openModal()" id="student_forgot">Click here</a> to reset</div>
           <div style="text-align: center; color: aliceblue;">Don't have an account? <a href="{% url 'user_register' %}">Click here</a> to register</div>
         </form>
-   </div>
+   </div> -->
 
-   <div class='form-box card-2' id="formDivStartup">
+    <!-- <div class='form-box card-2' id="formDivStartup">
        <h3 class='headerLogin'>Startup Login</h3>
        <hr class="my-4">
       <form action="{% url 'stp_login'%}" method="post">
         {% csrf_token %}
         <label for="startup_id" class="badge" style="color:white;font-size:20px;">Username:</label>
         <input type="text" name="startup_id" class="form-control" id="startup_id" placeholder="Username"><br>
-        <label for="passwd" class="badge" class="badge" style="color:white;font-size:20px;">Password:</label>
+        <label for="passwd" class="badge" style="color:white;font-size:20px;">Password:</label>
         <input type="password" name="passwd" class="form-control" id="passwd" placeholder="Password"><br>
         {% if messages %}
           <ul class="messages">
@@ -251,13 +281,110 @@ for(i=0; i<$('.nav-item').length; i++)
         <div style="text-align: center; color: aliceblue;">Forgot password? <a href="#" onclick="openModal()" id="startup_forgot">Click here</a> to reset</div>
         <div style="text-align: center; color: aliceblue;">Don't have an account? <a href="#">Click here</a> to register</div>
       </form>
+ </div> 
  </div>
- </div>
-</div>
-<!--Form html ends-->
+</div>-->
+    <!--Form html ends-->
+    <main class="main-content">
+      <section class="section py-8">
+        <div class="container">
+          <div class="row">
+            <div class="col-12 col-md-6 mx-auto">
+              <ul class="nav nav-pills nav-fill" role="tablist">
+                <li class="nav-item">
+                  <a class="nav-link active" data-toggle="tab" href="#studentRegistration">Student</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" data-toggle="tab" href="#startupRegistration">Startup</a>
+                </li>
+              </ul>
+              <div class="tab-content p-4">
+                <div class="tab-pane fade show active" id="studentRegistration">
+                  <div class="bg-white rounded shadow-7 container-fluid mw-100 p-6">
+                    <h5>Student Login</h5>
+                    <form action="{% url "stud_login" %}" method="post">
+                      {% csrf_token %}
+                      <div class="form-group">
+                        <label for="student_id">Username:</label>
+                        <input type="text" class="form-control" name="student_id" id="student_id"
+                          placeholder="Username">
+                      </div>
+                      <div class="form-group">
+                        <label for="passwd">Password:</label>
+                        <input type="password" class="form-control" name="passwd" id="passwd" placeholder="Password">
+                      </div>
 
-<!--Choice script begins-->
-<script>
+                      {% if messages %}
+                      <ul class="messages nav flex-column">
+                        {% for message in messages %}
+                        <li{% if message.tags %} class="{{ message.tags }} nav-item" {% endif %}><small
+                            class="text-danger">{{ message }}</small></li>
+                          {% endfor %}
+                      </ul>
+                      {% endif %}
+                      <div class="form-group flexbox py-3">
+                        <a class="text-muted small-2 ml-auto" href="#" data-toggle="modal"
+                          data-target="#student_forgot">Forgot password?</a>
+                      </div>
+
+                      <div class="form-group">
+                        <button name="student" class="btn btn-block btn-primary" type="submit">Login</button>
+                      </div>
+                    </form>
+                    <hr class="w-30 mb-0">
+                    <p class="text-center text-muted small-2 mb-0">Don't have an account? <a
+                        href="{% url 'user_register' %}#formDivStudent">Register here</a></p>
+                  </div>
+
+                </div>
+                <div class="tab-pane fade" id="startupRegistration">
+                  <div class="bg-white rounded shadow-7 container-fluid mw-100 p-6">
+                    <h5>Startup Login</h5>
+                    <form action="{% url 'stp_login'%}" method="post">
+                      {% csrf_token %}
+                      <div class="form-group">
+                        <label for="startup_id">Username:</label>
+                        <input type="text" class="form-control" name="startup_id" id="startup_id"
+                          placeholder="Username">
+                      </div>
+                      <div class="form-group">
+                        <label for="passwd">Password:</label>
+                        <input type="password" class="form-control" name="passwd" id="passwd" placeholder="Password">
+                      </div>
+
+                      {% if messages %}
+                      <ul class="messages nav flex-column">
+                        {% for message in messages %}
+                        <li{% if message.tags %} class="{{ message.tags }} nav-item" {% endif %}><small
+                            class="text-danger">{{ message }}</small></li>
+                          {% endfor %}
+                      </ul>
+                      {% endif %}
+                      <div class="form-group flexbox py-3">
+                        <a class="text-muted small-2 ml-auto" href="#" data-toggle="modal"
+                          data-target="#startup_forgot">Forgot
+                          password?</a>
+                      </div>
+
+                      <div class="form-group">
+                        <button name="startup" class="btn btn-block btn-primary" type="submit">Login</button>
+                      </div>
+                    </form>
+                    <hr class="w-30 mb-0">
+                    <p class="text-center text-muted small-2 mb-0">Don't have an account? <a
+                        href="{% url 'user_register' %}#formDivStartup">Register
+                        here</a></p>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <!--Choice script begins-->
+    <!-- <script>
     $('.ball1').on('mouseover', function(){
       $('#ballText1').css('font-size', '20px').css('transition', 'all 0.5s');
     }).on('mouseout', function(){
@@ -280,11 +407,11 @@ for(i=0; i<$('.nav-item').length; i++)
       $('#boxText2').css('color','black');}).on('mouseout',function(){
       $('#boxText2').css('color','white');
     });
-</script>
-<!--Choice script ends-->
+</script> -->
+    <!--Choice script ends-->
 
-<!--Form script begins-->
-<script>
+    <!--Form script begins-->
+    <!-- <script>
   var curr_show = document.querySelector('#formDivStudent');
 
   $('.ball1').on('mouseover',function(){
@@ -348,11 +475,65 @@ $('.box2').on('click', function(){
   curr_show = $('#formDivStartup');
 });
 
-</script>
-<!--Form script ends-->
+</script> -->
+    <!--Form script ends-->
+<!-- 
+    <div class="modal fade" id="student_forgot" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Reset Password</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
 
-<!--Forgot Password html begins-->
-<button type="button" class="btn btn-primary modalBtn" data-toggle="modal" data-target=".bd-example-modal-lg" style="display: none;"></button>
+          <div class="modal-body">
+            <h6>Please enter the following details</h6>
+            <form method='post' href="#">
+              <label for="student_id">Roll Number:</label>
+              <input type="text" name="student_id" class="form-control" id="student_id" required><br>
+              <label for="email">Email:</label>
+              <input type="text" name="email" class="form-control" id="email" required><br>
+            </form>
+          </div>
+
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary" id="forgot_password_student_submit">Submit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="startup_forgot" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel1">Reset Password</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+
+          <div class="modal-body">
+            <h6>Please enter the following details</h6>
+            <form id="startup_reset-form" method='post' href="#">
+              <label for="email">Email:</label>
+              <input type="text" name="email" class="form-control" id="email" required><br>
+            </form>
+          </div>
+
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary" id="forgot_password_startup_submit">Submit</button>
+          </div>
+        </div>
+      </div>
+    </div> -->
+
+    <!--Forgot Password html begins-->
+    <button type="button" class="btn btn-primary modalBtn" data-toggle="modal" data-target=".bd-example-modal-lg" style="display: none;"></button>
 
 <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
@@ -390,31 +571,33 @@ $('.box2').on('click', function(){
   </div>
 </div>
 
-<!--Forgot Password html end-->
+    <!--Forgot Password html end-->
 
-<!--Forgot Password script (including reset password form validation) end-->
-  <script>
-  $('#student_forgot').on('click',function(){
-    $('#student_reset').css('display','inline-block');
-    $('#startup_reset').css('display','none');
-  });
+    <!--Forgot Password script (including reset password form validation) end-->
+    <script>
+        $('#student_forgot').on('click',function(){
+          $('#student_reset').css('display','inline-block');
+          $('#startup_reset').css('display','none');
+        });
 
-    $('#startup_forgot').on('click',function(){
-    $('#startup_reset').css('display','inline-block');
-    $('#student_reset').css('display','none');
-  });
+          $('#startup_forgot').on('click',function(){
+          $('#startup_reset').css('display','inline-block');
+          $('#student_reset').css('display','none');
+        });
 
-    function openModal(){
-      $('.modalBtn').click();
-    }
+          function openModal(){
+            $('.modalBtn').click();
+          }
 
-    $("#forgot_password_startup_submit").on('click',function(){
-      if(document.querySelector("#startup_reset-form").email.value!=="")
-      {
-      alert("Reset link has been mailed to your registered e-mail ID.");}
-    });
-  </script>
-<!--Forgot Password script (including reset password form validation) end-->
+      $("#forgot_password_startup_submit").on('click', function () {
+        if (document.querySelector("#startup_reset-form").email.value !== "") {
+          alert("Reset link has been mailed to your registered e-mail ID.");
+        }
+      });
+    </script>
+    <!--Forgot Password script (including reset password form validation) end-->
+    <script src="{% static "js/page.min.js" %}"></script>
+    <script src="{% static "js/script.js" %}"></script>
+  </body>
 
-</body>
 </html>

@@ -5,40 +5,70 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width = device-width, initial scale = 1">
     <link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet">
-    <link href="{% static "css/styles.css" %}" rel="stylesheet">
-    <link href="{% static "css/all.min.css" %}" rel="stylesheet">
+    <link href="{% static "css/page.css" %}" rel="stylesheet">
+    <link href="{% static "css/page.min.css" %}" rel="stylesheet">
+    <link href="{% static "css/style2.css" %}" rel="stylesheet">
     <title>Startup's homepage</title>
+    <link rel="apple-touch-icon" href="{% static " images/UDGAM_logo.png " %}">
+    <link rel="icon" href="{% static " images/UDGAM_logo.png " %}">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-145301884-2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag('js', new Date());
+
+      gtag('config', 'UA-145301884-2');
+    </script>
   </head>
   <body>
     <script src="{% static "js/jquery.min.js" %}"></script>
-    <script src="{% static "js/myscript.js" %}"></script>
-    <script src="{% static "js/all.min.js" %}"></script>
-    <script src="{% static "js/popper.min.js" %}"></script>
-    <script src="{% static "js/bootstrap.min.js" %}"></script>
     <style>
-
-      html{
-        scroll-behavior: smooth;
+      body {
+        background: url("{% static "images/bgbody2.jpg" %}") no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        background-size: cover;
+        -o-background-size: cover;
       }
-
-      .myNav{
-        position: sticky;
-        top: 0;
-        z-index: 10;
+    
+      header {
+        background-image: url("{% static "images/whitebg.jpg" %}");
       }
-
-      body{
-        margin: 5px;
-        background-image: url("{% static "images/bg-color1.jpg" %}");
-        background-attachment: fixed;
-        position:sticky;
-      }
-
     </style>
 
+
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-stick-dark" data-navbar="sticky">
+      <div class="container">
+    
+        <div class="navbar-left mr-4">
+          <button class="navbar-toggler" type="button">&#9776;</button>
+          <a class="navbar-brand" href="#">
+            <img class="logo-dark" src="{% static "images/UDGAM_logo.png" %}" alt="logo" height="60px" width="60px">
+            <img class="logo-light" src="{% static "images/UDGAM_logo.png" %}" alt="logo" height="60px" width="60px">
+          </a>
+        </div>
+    
+        <section class="navbar-mobile">
+          <nav class="nav nav-navbar mr-auto">
+            <a class="nav-link" href="#" onclick="openModalProfile()">Profile</a>
+            <a class="nav-link js-scroll-trigger" href="#dashboard">Dashboard</a>
+            <a class="nav-link" href="#" onclick="openModalHireForm()">Add New Internship Position</a>
+            <a class="nav-link" href="#" onclick="openModalContactUs()">Contact us</a>
+          </nav>
+    
+          <nav class="nav nav-navbar ml-auto">
+            <a class="nav-link" href="#"><i class="fa fa-user"></i> {{startup}}</a>
+          </nav>
+          <div>
+            <a class="btn btn-sm btn-primary btn-round ml-lg-5 mr-2" href="{% url 'user_logout' pk=startup.id %}">Log Out</a>
+          </div>
+        </section>
+    
+      </div>
+    </nav>
     <!--Navbar begin-->
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light myNav">
+    <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light myNav">
       <a class="navbar-brand" href="#">Startup's page</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -70,54 +100,74 @@
           </li>
       </ul>
       </div>
-    </nav>
+    </nav> -->
     <!-- Navbar end-->
 
     <!--Navbar script start-->
-    <script>
+    <!-- <script>
     for(i=0; i<$('.nav-item').length; i++)
     {
       $('.nav-item').eq(i).mouseenter(function(){$(this).removeClass('active');}).mouseleave(function(){$(this).addClass('active');});
     }
-    </script>
+    </script> -->
     <!--Navbar script end-->
 
     <!--Dashboard style begins-->
     <style>
-    .jumbotron {
-    opacity:0.9;
-    }
+      td,th {
+        text-align: center;
+        vertical-align: middle;
+      }
     </style>
     <!--Dashboard style ends-->
 
     <!--Dashboard html begins-->
-    <section class="jumbotron section"  id="dashboard">
+    <header class="header section"  id="dashboard">
         <div class="container">
-          <h1 class="display-2">Welcome {{startup.user}} !! </h1>
-          <h3 > - {{startup.POC}}</h3>
-          <h6> - Please Upload Your Startup Logo by clicking on Profile </h6>
-          <hr class="my-4">
+          <div class="row gap-y">
+            <div class="col-md-8">
+              <h1 class="lead-7 fw-400">Welcome {{startup.user}} !! </h1>
+              <h3> - {{startup.POC}}</h3>
+              <hr class="w-30 ml-0">
+              <h6> - Please Upload Your Startup Logo by clicking on Profile </h6>
+            </div>
+            <div class="col-md-4">
+              <div class="col-10 mx-auto">
+                <img {% if startup.logo %} src="{{startup.logo.url}}" {% else %} src="{% static "images/na.png" %}" {% endif %} alt="Startup logo">
+              </div>
+            </div>
+          </div>
+          
+          <hr class="my-4 w-10 ml-0">
           <p class="lead">Here you can see students you have shortlisted by far.</p>
-            <div class="row gap-y table-responsive table-hover">
-              <table class="table">
+            <div class="row gap-y table-responsive">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Profile</th>
+                    <th>Status</th>
+                    <th>Resume</th>
+                  </tr>
+                </thead>
                 {% for updated_student in updated_students %}
-                <tr class="col-lg-6 col-md-6 col-sm-12 col-xs-12" onMouseOver="this.style.color='blue'" onMouseOut="this.style.color='black'" id="s1o">
-                  <td style="width:33%">Name : {{updated_student.student.user}}</td>
-                  <td style="width:33%">Profile : {{updated_student.intern_pos.profile}}</td>
-                  <td style="width:33%">Status : {{updated_student.status}}</td>
-                  <td style="width:33%"><a href="{{updated_student.resume}}"><i class="fa fa-download"></i> Resume </a></td>
+                <tr onMouseOver="this.style.color='#0275d8'" onMouseOut="this.style.color='black'"  id="s1o">
+                  <td style="width:25%">{{updated_student.student.user}}</td>
+                  <td style="width:25%">{{updated_student.intern_pos.profile}}</td>
+                  <td style="width:20%">{{updated_student.status}}</td>
+                  <td style="width:10%"><a href="{{updated_student.resume}}"><i class="fa fa-download"></i></a></td>
                   <form method="post">
                   {% csrf_token %}
                   <input type="hidden" name="student" value="{{updated_student.student.user}}">
                   <input type="hidden" name="pos" value="{{updated_student.intern_pos.profile}}">
-                  <td style="width:33%"><button class="unlist_button_1 btn btn-danger" type="submit"><i class="fa fa-minus"></i> Remove</button></td>
+                  <td style="width:20%"><button class="unlist_button_1 btn btn-danger" type="submit"><i class="fa fa-minus"></i> Remove</button></td>
                   </form>
                 </tr>
                 {% endfor %}
               </table>
             </div>
         </div>
-      </section>
+      </header>
     <!--Dashboard html ends-->
 
     <!--Other Student Details style begins-->
@@ -145,17 +195,25 @@
     <section class="section"  id="other_student_details">
       <div class="container">
         <header class="section-header">
-          <h2 class="display-3 fw-400 text-white">Available Students</h2>
+          <h2 class="display-3 fw-400">Available Students</h2>
         </header>
-        <div class="row gap-y">
-          <div class="row gap-y table-responsive table-hover">
-            <table class="table other">
+          <div class="row gap-y table-responsive">
+            <table class="table table-hover">
+                <thead class="bg-primary text-white">
+                  <tr>
+                    <th>Profile</th>
+                    <th>Name</th>
+                    <th>Resume</th>
+                    <th>Content</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
               {% for application in applied_students %}
-              <tr class="col-lg-6 col-md-6 col-sm-12 col-xs-12" onMouseOver="this.style.color='yellow'" onMouseOut="this.style.color='white'" id="s1o">
-                <td style="width:20%">Profile : {{application.intern_pos.profile}}</td>
-                <td style="width:20%">Name : {{application.student.user}}</td>
-                <td style="width:20%"><a href="{{application.resume}}"><i class="fa fa-download"></i> Resume </a></td>
-                <td style="width:20%" ><button class="btn btn-outline-warning" id="popup_button_of_{{application.student.user}}">Student's Content</button><span style="color:rgb(46, 250, 5)" class="popup_text popup_text_of_{{application.student.user}}" id="hey">{{application.content}}</span></td>
+              <tr style="color: white;" onMouseOver="this.style.color='#0275d8'" onMouseOut="this.style.color='white'">
+                <td style="width:25%">{{application.intern_pos.profile}}</td>
+                <td style="width:25%">{{application.student.user}}</td>
+                <td style="width:10%"><a href="{{application.resume}}"><i class="fa fa-download"></i></a></td>
+                <td style="width:20%" ><button class="btn btn-outline-warning" id="popup_button_of_{{application.student.user}}">Student's Content</button><span style="color: black;" class="popup_text popup_text_of_{{application.student.user}}" id="hey">{{application.content}}</span></td>
                 <td style="width:20%">
                   <div class="dropdown">
                     <button class="dropdown-toggle shortlist_button_1 btn btn-warning" data-toggle="dropdown">{{application.status}}</button>
@@ -192,7 +250,7 @@
               {% endfor %}
             </table>
           </div>
-        </div>
+        
       </div>
     </section>
     <!--Other Student Details html ends-->
@@ -373,7 +431,7 @@
     <!--Profile and hire position html begin-->
     <button type="button" data-backdrop="static" data-keyboard="false" class="btn btn-primary modalBtn" data-toggle="modal" data-target=".bd-example-modal-lg" style="display: none;"></button>
     <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-lg">
+      <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLongTitle">Your Profile</h5>
@@ -385,12 +443,13 @@
               <label for="company_name">Company: </label>
               <input type="text" name="company_name" id="company_name" class="form-control" placeholder="{{startup.user}}" readonly><br>
               <hr class="my4">
-              <p style="font-weight:bold;">Upload your company logo</p>
-              <div class="custom-file">
-    				  	{{ logo_form.as_p }}
-    				  </div>
-            <p> </p>
-           <button type="submit" class="btn btn-primary">Save changes</button>
+              <div class="text-center">
+                <p style="font-weight:bold;">Upload your company logo</p>
+                <div class="custom-file">
+                  {{ logo_form.as_p }}
+                </div>
+                <button type="submit" class="btn btn-primary mt-3">Save changes</button>
+              </div>
             </form>
           </div>
           <div id="apply_for_position_form">
@@ -411,14 +470,14 @@
             </form>
           </div>
           <div id="are_you_sure_prompt">
-            <p>Are you sure?
-            </p>
+            <h1 class="lead-4 text-center">Are you sure?</h1>
+            <br>
             <form method="post">
               {% csrf_token %}
               <input type="hidden" id="are_you_sure_prompt_student_name" name="are_you_sure_prompt_student_name" value="initial_value_1">
               <input type="hidden" id="are_you_sure_prompt_student_position" name="are_you_sure_prompt_student_position" value="initial_value_2">
-              <button type="submit" class="btn btn-outline-primary"  name="btn" value="Shortlist">Shortlist</button>
-              <button type="submit" class="btn btn-outline-primary" name="btn" value="Reject">Reject</button>
+              <button type="submit" class="btn btn-success"  name="btn" value="Shortlist">Shortlist</button>
+              <button type="submit" class="btn btn-danger float-right" name="btn" value="Reject">Reject</button>
             </form>
           </div>
           </div>
@@ -475,13 +534,14 @@
 
     <button type="button" data-backdrop="static" data-keyboard="false" class="btn btn-primary contactModalBtn" data-toggle="modal" data-target=".contact-modal" style="display: none;"></button>
     <div class="modal fade contact-modal" id="contact-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-lg">
+      <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLongTitle">Contact Us</h5>
+            <h5 class="modal-title">Contact Us</h5>
           </div>
-          <div class="modal-body" >
-            <p>For general queries, mail : internfair.iitg@gmail.com<hr>
+          <div class="modal-body text-center" >
+            <p>For general queries, mail : internfair.iitg@gmail.com
+              <hr class="w-30">
             For technical queries, mail : ayushjain.iitg@gmail.com</p>
           </div>
           <div class="modal-footer">
@@ -491,9 +551,20 @@
       </div>
     </div>
 
-    <footer class="credits">
-      <p><br><i class="fa fa-copyright"></i> 2019 Designed and Developed by Ashish Menon and Ayush Jain<br></p>
-  </footer>
+    <footer class="footer text-center" style="background-color: #0c0032;">
+      <div class="social social-sm social-bg-brand social-cycling">
+        <a class="social-twitter" href="https://twitter.com/ecelliitg"><i class="fa fa-twitter"></i></a>
+        <a class="social-facebook" href="https://www.facebook.com/ecell.iitg/"><i class="fa fa-facebook"></i></a>
+        <a href="mailto:edc@iitg.ac.in"><i class="fa fa-envelope"></i></a>
+        <a class="social-linkedin"
+          href="https://www.linkedin.com/company/udgam-the-annual-entrepreneurship-summit-of-iit-guwahati/"><i
+            class="fa fa-linkedin"></i></a>
+        <a class="social-instagram" href="https://www.instagram.com/ecell_iitg/"><i class="fa fa-instagram"></i></a>
+      </div>
+      <br>
+      <p class="small text-white">Copyright © 2020 UDGAM Creatives, All rights reserved.<br> Designed and Developed by
+        Ashish Menon, Rishi Pathak and Ayush Jain</p>
+    </footer>
 
   <script>
     function openModalContactUs(){
@@ -501,6 +572,7 @@
     }
   </script>
     <!--Credits and contact details end-->
-
-      </body>
-      </html>
+  <script src="{% static "js/page.min.js" %}"></script>
+  <script src="{% static "js/script.js" %}"></script>
+</body>
+</html>

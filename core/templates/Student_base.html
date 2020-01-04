@@ -4,41 +4,68 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width = device-width, initial scale = 1">
-    <link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet">
-    <link href="{% static "css/styles.css" %}" rel="stylesheet">
-    <link href="{% static "css/all.min.css" %}" rel="stylesheet">
+    <link href="{% static "css/page.css" %}" rel="stylesheet">
+    <link href="{% static "css/page.min.css" %}" rel="stylesheet">
+    <link href="{% static "css/style2.css" %}" rel="stylesheet">
     <title>Student homepage</title>
+    <link rel="apple-touch-icon" href="{% static " images/UDGAM_logo.png " %}">
+    <link rel="icon" href="{% static " images/UDGAM_logo.png " %}">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-145301884-2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag('js', new Date());
+
+      gtag('config', 'UA-145301884-2');
+    </script>
   </head>
+
   <body>
     <script src="{% static "js/jquery.min.js" %}"></script>
-    <script src="{% static "js/myscript.js" %}"></script>
-    <script src="{% static "js/all.min.js" %}"></script>
-    <script src="{% static "js/popper.min.js" %}"></script>
-    <script src="{% static "js/bootstrap.min.js" %}"></script>
     <style>
-
-      html{
-        scroll-behavior: smooth;
+      body {
+        background: url("{% static "images/bgbody2.jpg" %}") no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        background-size: cover;
+        -o-background-size: cover;
       }
-
-      .myNav{
-        position: sticky;
-        top: 0;
-        z-index: 10;
+      header {
+        background-image: url("{% static "images/whitebg.jpg" %}");
       }
-
-      body{
-        margin: 5px;
-        background-image: url("{% static "images/bg-color1.jpg" %}");
-        background-attachment: fixed;
-        position:sticky;
-      }
-
     </style>
 
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-stick-dark" data-navbar="sticky">
+      <div class="container">
+
+        <div class="navbar-left mr-4">
+          <button class="navbar-toggler" type="button">&#9776;</button>
+          <a class="navbar-brand" href="#">
+            <img class="logo-dark" src="{% static "images/UDGAM_logo.png" %}" alt="logo" height="60px" width="60px">
+            <img class="logo-light" src="{% static "images/UDGAM_logo.png" %}" alt="logo" height="60px" width="60px">
+          </a>
+        </div>
+
+        <section class="navbar-mobile">
+          <nav class="nav nav-navbar mr-auto">
+            <a class="nav-link js-scroll-trigger" href="#dashboard">Dashboard</a>
+            <a class="nav-link js-scroll-trigger" href="#other_startup_details">Available Startups</a>
+            <a class="nav-link" href="#" onclick="openModalContactUs()">Contact us</a>
+          </nav>
+
+          <nav class="nav nav-navbar ml-auto">
+            <a class="nav-link" href="#"><i class="fa fa-user"></i> {{student.name}}</a>
+          </nav>
+          <div>
+            <a class="btn btn-sm btn-primary btn-round ml-lg-5 mr-2" href="{%url 'user_logout' pk=student.id %}">Log Out</a>
+          </div>
+        </section>
+
+      </div>
+    </nav>
     <!--Navbar begin-->
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light myNav">
+    <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light myNav">
       <a class="navbar-brand" href="#">Student's page</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -64,24 +91,14 @@
           </li>
       </ul>
       </div>
-    </nav>
+    </nav> -->
     <!-- Navbar end-->
 
     <!--Navbar script start-->
-    <script>
-    for(i=0; i<$('.nav-item').length; i++)
-    {
-      $('.nav-item').eq(i).mouseenter(function(){$(this).removeClass('active');}).mouseleave(function(){$(this).addClass('active');});
-    }
-    </script>
     <!--Navbar script end-->
 
     <!--Dashbaord and Other Startup details style begin-->
-    <style>
-    .jumbotron {
-    opacity:0.9;
-    }
-
+    <!-- <style>
     #s1d,#s2d,#s3d,#s4d,#s5d,#s6d{
       display: none;
     }
@@ -109,96 +126,93 @@
      display:none;
    }
 
-    </style>
+    </style> -->
     <!-- Dashbaord and Other Startup details style ends-->
 
     <!--Dashboard html start-->
-    <section class="jumbotron section"  id="dashboard">
+    <header class="header section"  id="dashboard">
         <div class="container">
-          <h1 class="display-2">Welcome {{student.name}} </h1> <hr>
-          <h3> {% if chances == 0 %} 
-              You have reached the maximum number of applications a user can apply for!<br>
-              We wish you all the best for your applications!
-              {% else  %}
-          You have {{chances}} more chances to  apply and grab an internship!
-          {% endif %} </h3>
-          <hr class="my-4">
-          <p class="lead">Here you can see Startups you've registered for.</p>
+          <div class="row">
+            <div class="col-12">
+              <h1 class="lead-7 fw-400">Welcome {{student.name}} </h1>
+              <hr class="w-30 ml-0">
+              <h3> {% if chances == 0 %}
+                You have reached the maximum number of applications a user can apply for!<br>
+                We wish you all the best for your applications!
+                {% else  %}
+                You have {{chances}} more chances to apply and grab an internship!
+                {% endif %} </h3>
+              <hr class="my-4 w-10 ml-0">
+              <p class="lead">Here you can see Startups you've registered for :</p><br>
+            </div>
+          </div>
             <div class="row gap-y">
               {% for appliedstartup in applied_startups %}
-                  <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 hover-shadow-4 " id= "dashboard">
-                      <div class="flip-card">
-                          <div class="card justify-content-end bg-img h-400 shadow-8" data-scrim-bottom="7">
-                              <div class="card-body flex-grow-0 text-center">
-                                <div class="flip-card-front">
-                                  <img class="card-content" style="height: 200px; width:100%" src="{{appliedstartup.intern_pos.startup.logo.url}}"/>
-                                  <h3 class="card-content" >{{appliedstartup.intern_pos.startup}}</h3>
-                                  <h5 class="card-content">Profile : {{appliedstartup.intern_pos.profile}}</h5>
-                                </div>
-                              </div>
-                              <img class="card-background" src="{% static "images/white_background.jpg" %}"/>
-                              <div class="flip-card-back" >
-                                <h6 align="center"> <i class="fa fa-briefcase"> </i>Position Details</h6>
-                                <hr class="my4">
-                                <ul>
-                                <li> Location : {{appliedstartup.intern_pos.location}} </li>
-                                <li> Stipend : {{appliedstartup.intern_pos.stipend}} </li>
-                                <li> Allowances : {{appliedstartup.intern_pos.allowances}} </li>
-                                <li> Status : {{appliedstartup.status}} </li>                          
-                                </ul>
-                                <form method="post">
-                                {% csrf_token %}
-                                <input type="hidden" name="startup" value="{{appliedstartup.intern_pos.startup}}">
-                                <input type="hidden" name="my_profile" value="{{appliedstartup.intern_pos.profile}}">
-                                <button class="unregister_button btn btn-outline-danger" type="submit" {% if appliedstartup.status == 'PENDING'%} enable {% else %} disabled {% endif %}>Unregister</button><br>
-                                </form>
-                                <p> </p>
-                              </div>
-                            </div>
+                  <div class="col-12 col-sm-6 col-md-4 col-lg-3 hover-shadow-4 d-flex align-items-stretch">
+                    <div class="card d-block">
+                      <img class="card-img-top p-2" src="{{appliedstartup.intern_pos.startup.logo.url}}" alt="Card image cap">
+                      <div class="card-body">
+                        <h5 class="card-title">{{appliedstartup.intern_pos.startup}}</h5>
+                        <p>Profile : {{appliedstartup.intern_pos.profile}}</p>
                       </div>
+                      <div class="card-hover bg-dark text-white" data-animation="fade">
+                        <div class="card-body align-self-center">
+                          <h5><i class="fa fa-briefcase"> </i> Position Details</h5>
+                          <ul class="nav flex-column">
+                            <li> Location : {{appliedstartup.intern_pos.location}} </li>
+                            <li> Stipend : {{appliedstartup.intern_pos.stipend}} </li>
+                            <li> Allowances : {{appliedstartup.intern_pos.allowances}} </li>
+                            <li> Status : {{appliedstartup.status}} </li>
+                          </ul>
+                          <form method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="startup" value="{{appliedstartup.intern_pos.startup}}">
+                            <input type="hidden" name="my_profile" value="{{appliedstartup.intern_pos.profile}}">
+                            <button class="unregister_button btn btn-outline-danger mt-5" type="submit" {% if appliedstartup.status == 'PENDING'%}
+                              enable {% else %} disabled {% endif %}>Unregister</button><br>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                   {% endfor %}
               </div>
             </div>
-          </section>
+          </header>
     <!--Dashboard html end-->
 
     <!--Other Startup details html begin-->
     <section class="section"  id="other_startup_details">
         <div class="container">
             <header class="section-header">
-                <h2 class="display-3 fw-400 text-white">Available Startups</h2>
+                <h2 class="display-3 fw-400" style="background: none;">Available Startups</h2>
             </header>
             <div class="row gap-y">
             {% for startup in startups %}
-                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 hover-shadow-4" id="{{startup.user}}_other">
-                    <div class="flip-card">
-                        <div class="card justify-content-end bg-img h-400 shadow-8" data-scrim-bottom="7">
-                            <div class="card-body flex-grow-0 text-center">
-                              <div class="flip-card-front">
-                                <img class="card-content" style="height: 200px; width:100%" src="{{startup.logo.url}}"/>
-                                <h1 class="card-content" >{{startup.user}}</h1>
-                                <h1 class="card-content">{{startup.POC}}</h1>
-
-                              </div>
-                            </div>
-                            <img class="card-background" src="{% static "images/white_background.jpg" %}"/>
-                            <div class="flip-card-back" >
-                              <h6 align="center"> <i class="fa fa-briefcase"> </i>Hiring for positions</h6>
-                              <hr class="my4">
-                              <ul>
-                                {% for interndetail in intern_detail%}
-                                {% if interndetail.startup == startup%}
-                                <li>{{interndetail.profile}}</li>
-                                {% endif %}
-                                {% endfor %}
-                              </ul>
-                              <button class="register_button_{{startup.user}} btn btn-outline-success" id="{{startup.id}}">More Information</button><br>
-                              <p> </p>
-                            </div>
-                          </div>
+              <div class="col-12 col-sm-6 col-md-4 col-lg-3 hover-shadow-4 d-flex align-items-stretch" id="{{startup.user}}_other">
+                <div class="card d-block">
+                  <img class="card-img-top p-2" src="{{startup.logo.url}}" alt="Card image cap">
+                  <div class="card-body">
+                    <h5 class="card-title">{{startup.user}}</h5>
+                    <p>Point of Contact : {{startup.POC}}</p>
+                  </div>
+                  <div class="card-hover bg-dark text-white" data-animation="fade">
+                    <div class="card-body align-self-center">
+                      <h5><i class="fa fa-briefcase"></i> Hiring for positions</h5>
+                      <ul class="nav flex-column">
+                        {% for interndetail in intern_detail%}
+                        {% if interndetail.startup == startup%}
+                        <li>{{interndetail.profile}}</li>
+                        {% endif %}
+                        {% endfor %}
+                      </ul><br>
+                      <div class="text-center">
+                      <button class="register_button_{{startup.user}} btn btn-outline-success" id="{{startup.id}}">More Information</button>
+                      </div>
                     </div>
+                  </div>
                 </div>
+              </div>
                 {% endfor %}
               </div>
             </div>
@@ -284,8 +298,8 @@
     <!--Apply for Startups html begins-->
 
     <button type="button" data-backdrop="static" data-keyboard="false" class="btn btn-primary modalBtn" data-toggle="modal" data-target=".bd-example-modal-lg" style="display: none;"></button>
-    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-lg">
+    <div class="modal fade bd-example-modal-lg modal-long" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-long">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLongTitle">Apply for Startup</h5>
@@ -294,36 +308,56 @@
             <div id="{{startup.user}}" class="modal-body">
             <form method='post' href="{% url "stud_home" pk=student.id %}" enctype="multipart/form-data">
               {% csrf_token %}
-              <label for="startup_name">Company: </label>
-              <input type="text" name="startup_name" value="{{startup.user}}" id="startup_name" class="form-control" readonly><br>             
-              <p>Choose your profile:</p>
-              {% for internpos in intern_detail %}
-              {% if internpos.startup.user == startup.user %}
-              <input type='radio' name='profile' id="profile" value="{{internpos.profile}}">
-              <label for="profile">{{internpos.profile}}</label><br>
-              <label for="startup_name">Location: </label>
-              <input type="text" name="startup_location" value="{{internpos.location}}" id="startup_location" class="form-control" readonly><br>
-              <label for="startup_stipend">Stipend: </label>
-              <input type="text" name="startup_stipend" value="{{internpos.stipend}}" id="startup_stipend" class="form-control" readonly><br> 
-              {% endif %}
-              {% endfor %}
-              
-              <input type="hidden" name="startupName" value="{{startup.id}}" id="startupName" class="form-control"></input>
-              <label for="personal_question">What makes you a perfect fit? </label>
-              <input type='text' placeholder="Write in short..." class="form-control" name='content' maxlength="250" id='personal_question'>
-              <hr class="my4">
+              <label for="startup_name"><h4>Company:</h4></label>
+              <input type="text" name="startup_name" value="{{startup.user}}" id="startup_name" class="form-control" readonly><br>
+              <h4>Choose your profile:</h4>
+              <div class="row gap-y">
+                {% for internpos in intern_detail %}
+                {% if internpos.startup.user == startup.user %}
+                <div class="col-12 col-md-6 d-flex align-items-stretch">
+                  <label class="container-fluid">
+                    <input type="radio" name="profile" id="profile" value="{{internpos.profile}}" class="card-input-element" />
+                    <div class="card shadow-2 border card-input">
+                      <div class="card-body">
+                        <div class="card-title">{{internpos.profile}}</div>
+                        <h6>Location:</h6>
+                        <p class="lead">{{internpos.location}}</p>
+                        <h6>Stipend:</h6>
+                        <p class="lead">{{internpos.stipend}}</p>
+                      </div>
+                      <!-- <div class="card-header"><label for="profile">{{internpos.profile}}</label></div>
+                      <div class="card-body">
+                        <label for="startup_name">Location: </label>
+                        <input type="text" name="startup_location" value="{{internpos.location}}" id="startup_location" class="form-control"
+                          readonly><br>
+                        <label for="startup_stipend">Stipend: </label>
+                        <input type="text" name="startup_stipend" value="{{internpos.stipend}}" id="startup_stipend" class="form-control"
+                          readonly><br>
+                      </div> -->
+                    </div>
+                  </label>
+                </div>
+                {% endif %}
+                {% endfor %}
+              </div>
+              <input type="hidden" name="startupName" value="{{startup.id}}" id="startupName" class="form-control">
+              <label for="personal_question"><h4>What makes you a perfect fit? </h4></label>
+              <input type="text" placeholder="Write in short..." class="form-control" name="content" maxlength="250" id="personal_question">
+              <hr class="my-4">
               <p style="font-weight:bold;">Upload your CV</p>
-              
               <div class="custom-file col-12">
-    				  	{{form.resume}}  
-    				</div>
-           <button type="submit" class="btn btn-primary" {% if chances == 0 %} disabled {% endif %}>Apply</button>
+                {{form.resume}}
+              </div>
+              <div class="custom-file">
+                <input type="file" class="custom-file-input" id="customFile">
+                <label class="custom-file-label" for="customFile">Upload your CV</label>
+              </div>
+              <button type="submit" class="btn btn-primary mt-5" {% if chances == 0 %} disabled {% endif %}>Apply</button>
             </form>
           </div>
           {% endfor %}
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal" id="close_button">Close</button>
-            
           </div>
         </div>
       </div>
@@ -333,38 +367,49 @@
 
     <!--Apply for Startups Style begins-->
     <style>
-    form{
-      text-align: center;
-    }
+      form{
+        text-align: center;
+      }
+      .card-input-element {
+          display: none;
+      }
+
+      .card-input {
+          margin: 10px;
+          padding: 00px;
+      }
+
+      .card-input:hover, .card-mouse:hover {
+          cursor: pointer;
+      }
+
+      .card-input-element:checked + .card-input {
+          box-shadow: 0 0 1px 1px #2ecc71;
+      }
     </style>
     <!--Apply for Startups Style ends-->
     {% for startup in startups%}
       <script>
-
-      var x = document.getElementById("{{startup.id}}");
-      var y = document.querySelectorAll('.modal-body');
-      var z = document.getElementById("close_button");
-        x.addEventListener('click', function(){
-            for(var j=0; j<y.length; j++)
-            {
-              if(y[j].getAttribute("id")=="{{startup.user}}")
-              {
-                y[j].style.display = "inline-block";
-              }
-
+        var x = document.getElementById("{{startup.id}}");
+        var y = document.querySelectorAll('.modal-body');
+        var z = document.getElementById("close_button");
+        x.addEventListener('click', function () {
+          for (var j = 0; j < y.length; j++) {
+            if (y[j].getAttribute("id") == "{{startup.user}}") {
+              y[j].style.display = "inline-block";
             }
-            document.querySelector(".modalBtn").click();
-                });
+
+          }
+          document.querySelector(".modalBtn").click();
+        });
 
 
-                z.addEventListener("click",function()
-              {
-                console.log("hi");
-                for(var k=0; k<y.length; k++)
-              {
-                y[k].style.display = "none";
-              }
-              });
+        z.addEventListener("click", function () {
+          console.log("hi");
+          for (var k = 0; k < y.length; k++) {
+            y[k].style.display = "none";
+          }
+        });
 
       </script>
       {% endfor %}
@@ -423,16 +468,33 @@
       </div>
     </div>
 
-    <footer class="credits">
-      <p><br><i class="fa fa-copyright"></i>Copyright 2020 Designed and Developed by Ashish Menon and Ayush Jain<br></p>
-  </footer>
-
+    <footer class="footer text-center" style="background-color: #0c0032;">
+        <div class="social social-sm social-bg-brand social-cycling">
+          <a class="social-twitter" href="https://twitter.com/ecelliitg"><i class="fa fa-twitter"></i></a>
+          <a class="social-facebook" href="https://www.facebook.com/ecell.iitg/"><i class="fa fa-facebook"></i></a>
+          <a href="mailto:edc@iitg.ac.in"><i class="fa fa-envelope"></i></a>
+          <a class="social-linkedin"
+            href="https://www.linkedin.com/company/udgam-the-annual-entrepreneurship-summit-of-iit-guwahati/"><i
+              class="fa fa-linkedin"></i></a>
+          <a class="social-instagram" href="https://www.instagram.com/ecell_iitg/"><i class="fa fa-instagram"></i></a>
+        </div>
+        <br>
+        <p class="small text-white">Copyright © 2020 UDGAM Creatives, All rights reserved.<br> Designed and Developed by Ashish Menon, Rishi Pathak and Ayush Jain</p>
+    </footer>
   <script>
     function openModalContactUs(){
       $('.contactModalBtn').click();
     }
   </script>
     <!--Credits and contact details end-->
+    <script type="text/javascript">
 
-  </body>
-  </html>
+      $('.custom-file input').change(function (e) {
+        $(this).next('.custom-file-label').html(e.target.files[0].name);
+      });
+
+    </script>
+  <script src="{% static "js/page.min.js" %}"></script>
+  <script src="{% static "js/script.js" %}"></script>
+</body>
+</html>

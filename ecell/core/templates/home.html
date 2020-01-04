@@ -1,420 +1,425 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
+
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width = device-width, initial scale = 1">
-    <link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet">
-    <link href="{% static "css/styles.css" %}" rel="stylesheet">
-    <link href="{% static "css/all.min.css" %}" rel="stylesheet">
+    <link href="{% static " css/bootstrap.min.css " %}" rel="stylesheet">
+    <link href="{% static " css/styles.css " %}" rel="stylesheet">
+    <link href="{% static " css/all.min.css " %}" rel="stylesheet">
     <title>E-cell Internfair 2020</title>
-  </head>
-  <body>
-    <script src="{% static "js/jquery.min.js" %}"></script>
-    <script src="{% static "js/myscript.js" %}"></script>
-    <script src="{% static "js/all.min.js" %}"></script>
-    <script src="{% static "js/popper.min.js" %}"></script>
-    <script src="{% static "js/bootstrap.min.js" %}"></script>
+</head>
+
+<body>
+    <script src="{% static " js/jquery.min.js " %}"></script>
+    <script src="{% static " js/myscript.js " %}"></script>
+    <script src="{% static " js/all.min.js " %}"></script>
+    <script src="{% static " js/popper.min.js " %}"></script>
+    <script src="{% static " js/bootstrap.min.js " %}"></script>
 
     <style>
-      .myNav{
-        position: sticky;
-        top: 0;
-        z-index: 10;
-      }
-
-      body{
-        margin: 5px;
-        background-image: url("{% static "images/bg-color1.jpg" %}");
-        position:sticky;
-        background-attachment: fixed;
-      }
+        .myNav {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        
+        body {
+            margin: 5px;
+            background-image: url("{% static "images/bg-color1.jpg" %}");
+            position: sticky;
+            background-attachment: fixed;
+        }
     </style>
 
-<!--Navbar begin-->
+    <!--Navbar begin-->
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light myNav">
-      <a class="navbar-brand" href="#">Login portal</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <a class="navbar-brand" href="#">Login portal</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarText">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="{% url 'home' %}"><i class='fa fa-home' aria-hidden="true"></i> Home </a>
-          </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="{% url 'user_register' %}"><i class='fa fa-book' aria-hidden="true"></i> Register </a>
-          </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="#"><i class='fa fa-phone fa-flip-horizontal' aria-hidden="true"></i> Contact us</a>
-          </li>
-        </ul>
-      </div>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'home' %}"><i class='fa fa-home' aria-hidden="true"></i> Home </a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'user_register' %}"><i class='fa fa-book' aria-hidden="true"></i> Register
+            </a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="#"><i class='fa fa-phone fa-flip-horizontal' aria-hidden="true"></i> Contact
+              us</a>
+                </li>
+            </ul>
+        </div>
     </nav>
-<!-- Navbar end-->
+    <!-- Navbar end-->
 
-<!--Navbar script start-->
-<script>
-for(i=0; i<$('.nav-item').length; i++)
-{
-  $('.nav-item').eq(i).mouseenter(function(){$(this).removeClass('active');}).mouseleave(function(){$(this).addClass('active');});
-}
-</script>
-<!--Navbar script end-->
+    <!--Navbar script start-->
+    <script>
+        for (i = 0; i < $('.nav-item').length; i++) {
+            $('.nav-item').eq(i).mouseenter(function() {
+                $(this).removeClass('active');
+            }).mouseleave(function() {
+                $(this).addClass('active');
+            });
+        }
+    </script>
+    <!--Navbar script end-->
 
-<!-- Choice style begin-->
-<style>
+    <!-- Choice style begin-->
+    <style>
+        @media screen and (min-width: 576px) {
+            .myContainer {
+                margin: auto;
+                padding: 10%;
+                height: 100%;
+                position: relative;
+                min-height: 100%;
+            }
+            .box {
+                display: none;
+            }
+            .balls {
+                width: 100px;
+                display: inline-block;
+                border-radius: 20%;
+                height: 100px;
+                background-color: aliceblue;
+                position: absolute;
+                opacity: 0.8;
+                background: radial-gradient(circle at 100px 100px, #5cabff, #000);
+                cursor: pointer;
+                text-align: center;
+                transition: all 1s;
+            }
+            .ball1:hover,
+            .ball2:hover {
+                opacity: 1;
+                z-index: 1;
+                border-radius: 50%;
+                height: 150px;
+                width: 150px;
+                transition: all 1s;
+                text-align: center;
+                -webkit-animation-play-state: paused;
+                -moz-animation-play-state: paused;
+                -o-animation-play-state: paused;
+                animation-play-state: paused;
+            }
+            #ballText1,
+            #ballText2 {
+                text-align: center;
+                color: white;
+                font-size: 20px;
+                position: relative;
+                max-width: 60%;
+                margin: auto;
+                padding: 10px;
+            }
+        }
+        
+        @media screen and (max-width: 575px) {
+            .balls {
+                display: none;
+            }
+            .box {
+                display: inline-block;
+                width: 45%;
+                background-color: aliceblue;
+                background: radial-gradient(circle at 100px 100px, #5cabff, #000);
+                color: white;
+                text-align: center;
+            }
+            #boxText1:hover,
+            #boxText2:hover {
+                color: black;
+                -webkit-animation-play-state: paused;
+                -moz-animation-play-state: paused;
+                -o-animation-play-state: paused;
+                animation-play-state: paused;
+            }
+            #boxText1,
+            #boxText2 {
+                text-align: center;
+                color: white;
+                font-size: 20px;
+                position: relative;
+                max-width: 60%;
+                margin: auto;
+            }
+        }
+    </style>
+    <!--Choice style ends-->
 
-@media screen and (min-width: 576px) {
-	.myContainer{
-		margin: auto;
-		padding: 10%;
-		height: 100%;
-		position: relative;
-		min-height: 100%;
-	}
-
-	.box{
-		display:none;
-	}
-	.balls {
-		width: 100px;
-    display: inline-block;
-		border-radius: 20%;
-		height: 100px;
-		background-color: aliceblue;
-		position: absolute;
-		opacity: 0.8;
-		background: radial-gradient(circle at 100px 100px, #5cabff, #000);
-		cursor: pointer;
-		text-align: center;
-		transition: all 1s;
-	}
-
-  .ball1:hover, .ball2:hover{
-		opacity: 1;
-		z-index: 1;
-    border-radius:50%;
-		height: 150px;
-		width: 150px;
-		transition: all 1s;
-		text-align: center;
-		-webkit-animation-play-state: paused;
-			-moz-animation-play-state: paused;
-			-o-animation-play-state: paused;
-			animation-play-state: paused;
-	}
-
-  #ballText1, #ballText2{
-    text-align: center;
-    color: white;
-    font-size: 20px;
-    position: relative;
-    max-width: 60%;
-    margin: auto;
-    padding: 10px;
-  }
-  }
-
-  @media screen and (max-width: 575px) {
-      .balls{
-        display: none;
-      }
-
-      .box{
-        display: inline-block;
-        width: 45%;
-        background-color: aliceblue;
-        background: radial-gradient(circle at 100px 100px, #5cabff, #000);
-        color:white;
-        text-align: center;
-      }
-
-      #boxText1:hover,#boxText2:hover{
-        color:black;
-        -webkit-animation-play-state: paused;
-    			-moz-animation-play-state: paused;
-    			-o-animation-play-state: paused;
-    			animation-play-state: paused;
-      }
-
-      #boxText1, #boxText2{
-        text-align: center;
-        color: white;
-        font-size: 20px;
-        position: relative;
-        max-width: 60%;
-        margin: auto;
-      }
-  }
-
-</style>
-<!--Choice style ends-->
-
-<!--Form style begins-->
-<style>
-.card-1{
-  display: block;
-}
-
-.card-2{
-  display: none;
-}
-
-    .form-box{
-        position: relative;
-        padding: 2%;
-        margin: 1%;
-        width: 90%;
-        left: 5%;
-        background-color: rgba(120, 120 ,120, 0.5);
-        border: 0.2px solid aliceblue;
-        transition: all 0.3s;
-        border-radius: 5% 5%;
-    }
-    @media only screen and (max-width: 800px){
-        .form-box{
+    <!--Form style begins-->
+    <style>
+        .card-1 {
+            display: block;
+        }
+        
+        .card-2 {
+            display: none;
+        }
+        
+        .form-box {
+            position: relative;
+            padding: 2%;
+            margin: 1%;
             width: 90%;
             left: 5%;
-            right: 5%;
+            background-color: rgba(120, 120, 120, 0.5);
+            border: 0.2px solid aliceblue;
             transition: all 0.3s;
+            border-radius: 5% 5%;
         }
-    }
-    .form-box:hover{
-        box-shadow: 5px 5px 8px rgba(120 ,120, 120, 0.5);
-    }
+        
+        @media only screen and (max-width: 800px) {
+            .form-box {
+                width: 90%;
+                left: 5%;
+                right: 5%;
+                transition: all 0.3s;
+            }
+        }
+        
+        .form-box:hover {
+            box-shadow: 5px 5px 8px rgba(120, 120, 120, 0.5);
+        }
+        
+        .headerLogin {
+            font-family: 'Century Gothic';
+            text-align: center;
+            color: aliceblue;
+            font-size: 50px;
+        }
+    </style>
 
-    .headerLogin{
-        font-family: 'Century Gothic';
-        text-align: center;
-        color: aliceblue;
-        font-size: 50px;
-    }
-</style>
+    <!--Form style ends-->
 
-<!--Form style ends-->
+    <!--Choice html begins-->
+    <div class="row overall">
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12  myContainer">
+            <div class='box box1 btn'><span id='boxText1'>Student</span></div>
+            <div class='box box2 btn'><span id="boxText2">Start-Up</span></div>
+            <div class='balls ball1'><span id='ballText1'><br> Student</span></div><br><br><br><br><br><br>
+            <div class='balls ball2'><span id='ballText2'><br> Start-Up </span></div>
+        </div>
+        <!--Choice html ends-->
 
-<!--Choice html begins-->
-<div class="row overall">
-	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12  myContainer">
-    <div class='box box1 btn'><span id='boxText1'>Student</span></div>
-    <div class='box box2 btn'><span id="boxText2">Start-Up</span></div>
-	  		<div class='balls ball1'><span id='ballText1'><br> Student</span></div><br><br><br><br><br><br>
-	  		<div class='balls ball2'><span id='ballText2'><br> Start-Up </span></div>
-</div>
-<!--Choice html ends-->
+        <!--Form html begins-->
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+            <div class='form-box card-1' id="formDivStudent">
+                <h3 class='headerLogin'>Student Login</h3>
+                <hr class="my-4">
+                <form action="{% url " stud_login " %}" method="post">
+                    {% csrf_token %}
+                    <label for="student_id" class="badge" style="color:white;font-size:20px;">Username:</label>
+                    <input type="text" name="student_id" class="form-control" id="student_id" placeholder="Username" required><br>
+                    <label for="passwd" class="badge" style="color:white;font-size:20px;">Password:</label>
+                    <input type="password" name="passwd" class="form-control" id="passwd" placeholder="Password"><br> {% if messages %}
+                    <ul class="messages">
+                        {% for message in messages %}
+                        <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                            {% endfor %}
+                    </ul>
+                    {% endif %}
+                    <button class='btn btn-primary' style="position: relative; left: 40%; width: 20%;" name="student">Login</button>
+                    <hr class="my-4">
+                    <div style="text-align: center; color: aliceblue;">Forgot password? <a href="#" onclick="openModal()" id="student_forgot">Click here</a> to reset</div>
+                    <div style="text-align: center; color: aliceblue;">Don't have an account? <a href="{% url 'user_register' %}">Click here</a> to register</div>
+                </form>
+            </div>
 
-<!--Form html begins-->
-   <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-     <div class='form-box card-1' id="formDivStudent">
- 		    <h3 class='headerLogin'>Student Login</h3>
- 		    <hr class="my-4">
-        <form action="{% url "stud_login" %}" method="post">
-          {% csrf_token %}
-          <label for="student_id" class="badge" style="color:white;font-size:20px;" >Username:</label>
-          <input type="text" name="student_id" class="form-control" id="student_id" placeholder="Username" required><br>
-          <label for="passwd" class="badge" style="color:white;font-size:20px;">Password:</label>
-          <input type="password" name="passwd" class="form-control" id="passwd" placeholder="Password"><br>
-          {% if messages %}
-            <ul class="messages">
-                {% for message in messages %}
-                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-                {% endfor %}
-            </ul>
-          {% endif %}
-          <button class='btn btn-primary' style="position: relative; left: 40%; width: 20%;" name="student">Login</button>
-          <hr class="my-4">
-          <div style="text-align: center; color: aliceblue;">Forgot password? <a href="#" onclick="openModal()" id="student_forgot">Click here</a> to reset</div>
-          <div style="text-align: center; color: aliceblue;">Don't have an account? <a href="{% url 'user_register' %}">Click here</a> to register</div>
-        </form>
-   </div>
-
-   <div class='form-box card-2' id="formDivStartup">
-       <h3 class='headerLogin'>Startup Login</h3>
-       <hr class="my-4">
-      <form action="{% url 'stp_login'%}" method="post">
-        {% csrf_token %}
-        <label for="startup_id" class="badge" style="color:white;font-size:20px;">Username:</label>
-        <input type="text" name="startup_id" class="form-control" id="startup_id" placeholder="Username"><br>
-        <label for="passwd" class="badge" class="badge" style="color:white;font-size:20px;">Password:</label>
-        <input type="password" name="passwd" class="form-control" id="passwd" placeholder="Password"><br>
-        {% if messages %}
-          <ul class="messages">
-              {% for message in messages %}
-              <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-              {% endfor %}
-          </ul>
-        {% endif %}
-        <button class='btn btn-primary' style="position: relative; left: 40%; width: 20%;" name="startup">Login</button>
-        <hr class="my-4">
-        <div style="text-align: center; color: aliceblue;">Forgot password? <a href="#" onclick="openModal()" id="startup_forgot">Click here</a> to reset</div>
-        <div style="text-align: center; color: aliceblue;">Don't have an account? <a href="#">Click here</a> to register</div>
-      </form>
- </div>
- </div>
-</div>
-<!--Form html ends-->
-
-<!--Choice script begins-->
-<script>
-    $('.ball1').on('mouseover', function(){
-      $('#ballText1').css('font-size', '20px').css('transition', 'all 0.5s');
-    }).on('mouseout', function(){
-      $('#ballText1').css('font-size', '15px').css('transition', 'all 0.5s');
-    });
-
-    $('.box1').on('mouseover', function(){
-      $('#boxText1').css('font-size', '20px').css('transition', 'all 0.5s');
-    }).on('mouseout', function(){
-      $('#boxText1').css('font-size', '15px').css('transition', 'all 0.5s');
-    });
-
-    $('.box1').on('mouseover',function(){
-      $('#boxText1').css('color','black');
-    }).on('mouseout',function(){
-        $('#boxText1').css('color','white');
-      });
-
-    $('.box2').on('mouseover',function(){
-      $('#boxText2').css('color','black');}).on('mouseout',function(){
-      $('#boxText2').css('color','white');
-    });
-</script>
-<!--Choice script ends-->
-
-<!--Form script begins-->
-<script>
-  var curr_show = document.querySelector('#formDivStudent');
-
-  $('.ball1').on('mouseover',function(){
-    $('#formDivStudent').css('display','block');
-    $('#formDivStartup').css('display','none');
-  }).on('mouseout',function(){
-    $('#formDivStudent').css('display','none');
-    $('#formDivStartup').css('display','none');
-    curr_show.css('display','block');
-  });
-
-  $('.ball2').on('mouseover',function(){
-    $('#formDivStudent').css('display','none');
-    $('#formDivStartup').css('display','block');
-  }).on('mouseout',function(){
-    $('#formStudent').css('display','none');
-    $('#formDivStartup').css('display','none');
-    curr_show.css('display','block');
-  });
-
-  $('.ball1').on('click', function(){
-    $('#formDivStudent').css('display','block');
-    $('#formDivStartup').css('display','none');
-    curr_show = $('#formDivStudent');
-  });
-
-  $('.ball2').on('click', function(){
-    $('#formDivStudent').css('display','none');
-    $('#formDivStartup').css('display','block');
-    curr_show = $('#formDivStartup');
-  });
-
-  var curr_show = $('#formDivStudent');
-$('.box1').on('mouseover',function(){
-  $('#formDivStudent').css('display','block');
-  $('#formDivStartup').css('display','none');
-}).on('mouseout',function(){
-  $('#formDivStudent').css('display','none');
-  $('#formDivStartup').css('display','none');
-  curr_show.css('display','block');
-});
-
-$('.box2').on('mouseover',function(){
-  $('#formDivStudent').css('display','none');
-  $('#formDivStartup').css('display','block');
-}).on('mouseout',function(){
-  $('#formStudent').css('display','none');
-  $('#formDivStartup').css('display','none');
-  curr_show.css('display','block');
-});
-
-$('.box1').on('click', function(){
-  $('#formDivStudent').css('display','block');
-  $('#formDivStartup').css('display','none');
-  curr_show = $('#formDivStudent');
-});
-
-$('.box2').on('click', function(){
-  $('#formDivStudent').css('display','none');
-  $('#formDivStartup').css('display','block');
-  curr_show = $('#formDivStartup');
-});
-
-</script>
-<!--Form script ends-->
-
-<!--Forgot Password html begins-->
-<button type="button" class="btn btn-primary modalBtn" data-toggle="modal" data-target=".bd-example-modal-lg" style="display: none;"></button>
-
-<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Reset Password</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div  id="student_reset">
-        <h6>Please enter the following details</h6>
-        <form method='post' href="#">
-          <label for="student_id" class="badge" style="font-weight:normal; font-size:15px;">Roll Number:</label>
-          <input type="text" name="student_id" class="form-control" id="student_id" required><br>
-          <label for="email" class="badge" style="font-weight:normal; font-size:15px;">Email:</label>
-          <input type="text" name="email" class="form-control" id="email" required><br>
-          <button type="submit" class="btn btn-primary" id="forgot_password_student_submit">Submit</button>
-        </form>
-      </div>
-      <div id="startup_reset">
-        <h6>Please enter the following details</h6>
-        <form id="startup_reset-form" method='post' href="#">
-          <label for="email" class="badge" style="font-weight:normal; font-size:15px;">Email:</label>
-          <input type="text" name="email" class="form-control" id="email" required><br>
-          <button type="submit" class="btn btn-primary" id="forgot_password_startup_submit">Submit</button>
-        </form>
-      </div>
+            <div class='form-box card-2' id="formDivStartup">
+                <h3 class='headerLogin'>Startup Login</h3>
+                <hr class="my-4">
+                <form action="{% url 'stp_login'%}" method="post">
+                    {% csrf_token %}
+                    <label for="startup_id" class="badge" style="color:white;font-size:20px;">Username:</label>
+                    <input type="text" name="startup_id" class="form-control" id="startup_id" placeholder="Username"><br>
+                    <label for="passwd" class="badge" class="badge" style="color:white;font-size:20px;">Password:</label>
+                    <input type="password" name="passwd" class="form-control" id="passwd" placeholder="Password"><br> {% if messages %}
+                    <ul class="messages">
+                        {% for message in messages %}
+                        <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                            {% endfor %}
+                    </ul>
+                    {% endif %}
+                    <button class='btn btn-primary' style="position: relative; left: 40%; width: 20%;" name="startup">Login</button>
+                    <hr class="my-4">
+                    <div style="text-align: center; color: aliceblue;">Forgot password? <a href="#" onclick="openModal()" id="startup_forgot">Click here</a> to reset</div>
+                    <div style="text-align: center; color: aliceblue;">Don't have an account? <a href="#">Click here</a> to register
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
+    <!--Form html ends-->
+
+    <!--Choice script begins-->
+    <script>
+        $('.ball1').on('mouseover', function() {
+            $('#ballText1').css('font-size', '20px').css('transition', 'all 0.5s');
+        }).on('mouseout', function() {
+            $('#ballText1').css('font-size', '15px').css('transition', 'all 0.5s');
+        });
+
+        $('.box1').on('mouseover', function() {
+            $('#boxText1').css('font-size', '20px').css('transition', 'all 0.5s');
+        }).on('mouseout', function() {
+            $('#boxText1').css('font-size', '15px').css('transition', 'all 0.5s');
+        });
+
+        $('.box1').on('mouseover', function() {
+            $('#boxText1').css('color', 'black');
+        }).on('mouseout', function() {
+            $('#boxText1').css('color', 'white');
+        });
+
+        $('.box2').on('mouseover', function() {
+            $('#boxText2').css('color', 'black');
+        }).on('mouseout', function() {
+            $('#boxText2').css('color', 'white');
+        });
+    </script>
+    <!--Choice script ends-->
+
+    <!--Form script begins-->
+    <script>
+        var curr_show = document.querySelector('#formDivStudent');
+
+        $('.ball1').on('mouseover', function() {
+            $('#formDivStudent').css('display', 'block');
+            $('#formDivStartup').css('display', 'none');
+        }).on('mouseout', function() {
+            $('#formDivStudent').css('display', 'none');
+            $('#formDivStartup').css('display', 'none');
+            curr_show.css('display', 'block');
+        });
+
+        $('.ball2').on('mouseover', function() {
+            $('#formDivStudent').css('display', 'none');
+            $('#formDivStartup').css('display', 'block');
+        }).on('mouseout', function() {
+            $('#formStudent').css('display', 'none');
+            $('#formDivStartup').css('display', 'none');
+            curr_show.css('display', 'block');
+        });
+
+        $('.ball1').on('click', function() {
+            $('#formDivStudent').css('display', 'block');
+            $('#formDivStartup').css('display', 'none');
+            curr_show = $('#formDivStudent');
+        });
+
+        $('.ball2').on('click', function() {
+            $('#formDivStudent').css('display', 'none');
+            $('#formDivStartup').css('display', 'block');
+            curr_show = $('#formDivStartup');
+        });
+
+        var curr_show = $('#formDivStudent');
+        $('.box1').on('mouseover', function() {
+            $('#formDivStudent').css('display', 'block');
+            $('#formDivStartup').css('display', 'none');
+        }).on('mouseout', function() {
+            $('#formDivStudent').css('display', 'none');
+            $('#formDivStartup').css('display', 'none');
+            curr_show.css('display', 'block');
+        });
+
+        $('.box2').on('mouseover', function() {
+            $('#formDivStudent').css('display', 'none');
+            $('#formDivStartup').css('display', 'block');
+        }).on('mouseout', function() {
+            $('#formStudent').css('display', 'none');
+            $('#formDivStartup').css('display', 'none');
+            curr_show.css('display', 'block');
+        });
+
+        $('.box1').on('click', function() {
+            $('#formDivStudent').css('display', 'block');
+            $('#formDivStartup').css('display', 'none');
+            curr_show = $('#formDivStudent');
+        });
+
+        $('.box2').on('click', function() {
+            $('#formDivStudent').css('display', 'none');
+            $('#formDivStartup').css('display', 'block');
+            curr_show = $('#formDivStartup');
+        });
+    </script>
+    <!--Form script ends-->
+
+    <!--Forgot Password html begins-->
+    <button type="button" class="btn btn-primary modalBtn" data-toggle="modal" data-target=".bd-example-modal-lg" style="display: none;"></button>
+
+    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Reset Password</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+                </div>
+                <div class="modal-body">
+                    <div id="student_reset">
+                        <h6>Please enter the following details</h6>
+                        <form method='post' href="#">
+                            <label for="student_id" class="badge" style="font-weight:normal; font-size:15px;">Roll Number:</label>
+                            <input type="text" name="student_id" class="form-control" id="student_id" required><br>
+                            <label for="email" class="badge" style="font-weight:normal; font-size:15px;">Email:</label>
+                            <input type="text" name="email" class="form-control" id="email" required><br>
+                            <button type="submit" class="btn btn-primary" id="forgot_password_student_submit">Submit</button>
+                        </form>
+                    </div>
+                    <div id="startup_reset">
+                        <h6>Please enter the following details</h6>
+                        <form id="startup_reset-form" method='post' href="#">
+                            <label for="email" class="badge" style="font-weight:normal; font-size:15px;">Email:</label>
+                            <input type="text" name="email" class="form-control" id="email" required><br>
+                            <button type="submit" class="btn btn-primary" id="forgot_password_startup_submit">Submit</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-</div>
 
-<!--Forgot Password html end-->
+    <!--Forgot Password html end-->
 
-<!--Forgot Password script (including reset password form validation) end-->
-  <script>
-  $('#student_forgot').on('click',function(){
-    $('#student_reset').css('display','inline-block');
-    $('#startup_reset').css('display','none');
-  });
+    <!--Forgot Password script (including reset password form validation) end-->
+    <script>
+        $('#student_forgot').on('click', function() {
+            $('#student_reset').css('display', 'inline-block');
+            $('#startup_reset').css('display', 'none');
+        });
 
-    $('#startup_forgot').on('click',function(){
-    $('#startup_reset').css('display','inline-block');
-    $('#student_reset').css('display','none');
-  });
+        $('#startup_forgot').on('click', function() {
+            $('#startup_reset').css('display', 'inline-block');
+            $('#student_reset').css('display', 'none');
+        });
 
-    function openModal(){
-      $('.modalBtn').click();
-    }
+        function openModal() {
+            $('.modalBtn').click();
+        }
 
-    $("#forgot_password_startup_submit").on('click',function(){
-      if(document.querySelector("#startup_reset-form").email.value!=="")
-      {
-      alert("Reset link has been mailed to your registered e-mail ID.");}
-    });
-  </script>
-<!--Forgot Password script (including reset password form validation) end-->
+        $("#forgot_password_startup_submit").on('click', function() {
+            if (document.querySelector("#startup_reset-form").email.value !== "") {
+                alert("Reset link has been mailed to your registered e-mail ID.");
+            }
+        });
+    </script>
+    <!--Forgot Password script (including reset password form validation) end-->
 
 </body>
+
 </html>
