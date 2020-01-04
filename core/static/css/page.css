@@ -13661,7 +13661,7 @@ you can use the generic selector below, but it's slower:
 .pswp__button,
 .pswp__button--arrow--left:before,
 .pswp__button--arrow--right:before {
-  background: url(../img/app/photoswipe/default-skin.png) 0 0 no-repeat;
+  
   -webkit-background-size: 264px 88px;
           background-size: 264px 88px;
   width: 44px;
@@ -13671,8 +13671,7 @@ you can use the generic selector below, but it's slower:
   /* Serve SVG sprite if browser supports SVG and resolution is more than 105dpi */
   .pswp--svg .pswp__button,
   .pswp--svg .pswp__button--arrow--left:before,
-  .pswp--svg .pswp__button--arrow--right:before {
-    background-image: url(../img/app/photoswipe/default-skin.svg); }
+  .pswp--svg .pswp__button--arrow--right:before 
   .pswp--svg .pswp__button--arrow--left,
   .pswp--svg .pswp__button--arrow--right {
     background: none; } }
@@ -13924,9 +13923,9 @@ a.pswp__share--download:hover {
 
 .pswp__preloader--active {
   opacity: 1; }
-  .pswp__preloader--active .pswp__preloader__icn {
+  .pswp__preloader--active .pswp__preloader__icn 
     /* We use .gif in browsers that don't support CSS animation */
-    background: url(../img/app/photoswipe/preloader.gif) 0 0 no-repeat; }
+    
 
 .pswp--css_animation .pswp__preloader--active {
   opacity: 1; }
