@@ -8,5 +8,7 @@
         "vector": "cpp"
     },
     "C_Cpp.errorSquiggles": "Disabled",
-    "python.pythonPath": "internportal\\Scripts\\python.exe"
+    "python.pythonPath": "internportal\\Scripts\\python.exe",
+    "python.linting.pylintEnabled": true,
+    "python.linting.enabled": true
 }

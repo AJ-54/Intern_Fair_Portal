@@ -13,6 +13,7 @@ class StartUpsForm(UserCreationForm):
 class StudentsForm(UserCreationForm):
     name = forms.CharField(max_length=100)
     roll_number = forms.IntegerField(label='IITG Roll Number')
+    phone_number = forms.RegexField(regex=r'^\d{9,10}$')
     email = forms.EmailField(max_length=150)
     class Meta():
         model = User

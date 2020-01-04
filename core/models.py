@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save,post_delete
 from django.dispatch import receiver
+from django.core.validators import RegexValidator
 import os
 
 
@@ -26,6 +27,8 @@ class Students(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE,related_name='student')
     name = models.CharField(max_length=50)
     roll_number = models.IntegerField()
+    phone_regex = RegexValidator(regex=r'^\d{9,10}$', message="Phone number must be entered in the format: '9876543210'. Up to 10 digits allowed.")
+    phone_number = models.CharField(validators=[phone_regex], max_length=13, blank=True) # validators should be a list
     email = models.EmailField(max_length=150)
     
     def __str__(self):
