@@ -1,4 +1,4 @@
-{% load static %}
+
 #overlay {
     width: 100%;
     /* Full width (cover the whole page) */
@@ -19,7 +19,7 @@
 }
 
 body {
-    background: url("{% static "images/bg-color1.jpg" %}") no-repeat center center fixed;
+    background: url("../images/bg-color1.jpg") no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     background-size: cover;
