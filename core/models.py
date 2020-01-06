@@ -19,6 +19,7 @@ class StartUps(models.Model):
     POC = models.CharField(max_length=50)
     email = models.EmailField(max_length=150)
     logo = models.ImageField(upload_to=user_directory_path1,blank=True)
+    description = models.TextField(blank = True)
 
     def __str__(self):
         return self.user.username

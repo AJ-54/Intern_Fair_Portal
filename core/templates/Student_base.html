@@ -311,6 +311,7 @@
               {% csrf_token %}
               <label for="startup_name"><h4>Company:</h4></label>
               <input type="text" name="startup_name" value="{{startup.user}}" id="startup_name" class="form-control" readonly><br>
+              <input type="text" name="startup_name" value="{% if  startup.description %}{{startup.description}} {% else %} {% endif %}" id="startup_name" class="form-control" readonly><br>              
               <h4>Choose your profile:</h4>
               <div class="row gap-y">
                 {% for internpos in intern_detail %}
