@@ -21,7 +21,7 @@ class StudentsForm(UserCreationForm):
 
 class ApplicationForm(forms.Form):
     resume = forms.FileField()
-    content = forms.CharField(max_length=100)
+    content = forms.CharField(max_length=100 , required=False)
 
 class LogoForm(forms.Form):
     logo = forms.ImageField()
