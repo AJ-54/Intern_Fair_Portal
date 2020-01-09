@@ -54,7 +54,7 @@ class  Application(models.Model):
     student = models.ForeignKey(Students ,on_delete=models.CASCADE, related_name='application')
     intern_pos = models.ForeignKey(InternDetails,on_delete=models.CASCADE, related_name='proposal')
     resume = models.FileField(upload_to=user_directory_path)
-    content = models.TextField(max_length=100)
+    content = models.TextField(max_length=100, blank=True, null=True)
     status = models.CharField(max_length=10, null=True, choices=STATUSES, default='PENDING')
 
     def __str__(self):
