@@ -156,7 +156,7 @@
                         <h5 class="card-title">{{appliedstartup.intern_pos.startup}}</h5>
                         <p>Profile : {{appliedstartup.intern_pos.profile}}</p>
                       </div>
-                      <div class="card-hover bg-dark text-white" data-animation="fade">
+                      <div class="card-hover bg-dark text-white pre-scrollable" data-animation="fade">
                         <div class="card-body align-self-center">
                           <h5><i class="fa fa-briefcase"> </i> Position Details</h5>
                           <ul class="nav flex-column">
@@ -191,12 +191,12 @@
             <div class="row gap-y">
             {% for startup in startups %}
               <div class="col-12 col-sm-6 col-md-4 col-lg-3 hover-shadow-4 d-flex align-items-stretch" id="{{startup.user}}_other">
-                <div class="card d-block">
+                <div class="card d-block container-fluid">
                   <img class="card-img-top p-2" src="{% if startup.logo %}{{startup.logo.url}} {% else %}{% endif %}" alt="Card image cap">
                   <div class="card-body">
                     <h5 class="card-title">{{startup.user}}</h5>
                   </div>
-                  <div class="card-hover bg-dark text-white" data-animation="fade">
+                  <div class="card-hover bg-dark text-white pre-scrollable" data-animation="fade">
                     <div class="card-body align-self-center">
                       <h5><i class="fa fa-briefcase"></i> Hiring for positions</h5>
                       <ul class="nav flex-column">
@@ -344,7 +344,7 @@
               </div>
               <input type="hidden" name="startupName" value="{{startup.id}}" id="startupName" class="form-control">
               <label for="personal_question"><h4>What makes you a perfect fit? </h4></label>
-              <input type="text" placeholder="Write in short..." class="form-control" name="content" maxlength="250" id="personal_question">
+              <input type="text" placeholder="Write in short..." class="form-control" name="content" maxlength="250" id="personal_question" required>
               <hr class="my-4">
               <p style="font-weight:bold;">Upload your CV</p>
               <div class="custom-file col-12">
@@ -477,7 +477,7 @@
           <a class="social-instagram" href="https://www.instagram.com/ecell_iitg/"><i class="fa fa-instagram"></i></a>
         </div>
         <br>
-        <p class="small text-white">Copyright © 2020 UDGAM Creatives, All rights reserved.<br> Designed and Developed by Ashish Menon, Rishi Pathak and Ayush Jain</p>
+        <p class="small text-white">Copyright Â© 2020 UDGAM Creatives, All rights reserved.<br> Designed and Developed by Ashish Menon, Rishi Pathak and Ayush Jain</p>
     </footer>
   <script>
     function openModalContactUs(){
