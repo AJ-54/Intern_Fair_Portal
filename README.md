@@ -15,7 +15,7 @@ Some interesting features are:
   * Apply with individual resume for each application.
   * Restricted applications limit to 5.
   * See status of their application.
-  * Cancel applications (auto clearing of resume from database
+  * Cancel applications (auto clearing of resume from database)
   
 ## Tech Stack Used 
   * Django 
