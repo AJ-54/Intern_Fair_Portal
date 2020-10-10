@@ -1,6 +1,7 @@
 # Intern_Fair_Portal
 
 This portal was used during UDGAM-2020 to conduct Intern-Fair. The portal supports variety of features for both students and startups.
+The website is live at https://internfair.herokuapp.com/
 
 ## Startups
 
